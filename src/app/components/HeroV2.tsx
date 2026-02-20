@@ -86,7 +86,7 @@ const HeroV2 = () => {
 
         {/* 3D Helicoid Visual — behind content on mobile/tablet, right-aligned on desktop */}
         <div className="absolute inset-0 lg:left-auto lg:right-0 lg:w-[55%] h-full z-10 pointer-events-none">
-          <div className="w-full h-full pointer-events-auto opacity-25 sm:opacity-35 lg:opacity-100 transition-opacity">
+          <div className="w-full h-full pointer-events-auto opacity-50 sm:opacity-60 lg:opacity-100 transition-opacity">
             <TorqueHelicoid />
           </div>
         </div>
@@ -117,7 +117,7 @@ const HeroV2 = () => {
 
             {/* Subheadline */}
             <p className="text-lg md:text-xl text-black/60 mb-8 leading-relaxed max-w-2xl">
-              Turn raw Solana data into surgical incentives. Torque automates the logic of acquisition, retention, and liquidity—eliminating capital friction.
+              Torque turns onchain data into programmable incentives. Target the right users, reward the right behaviors, and grow your protocol without wasting capital.
             </p>
 
             {/* Action Buttons */}
@@ -127,15 +127,15 @@ const HeroV2 = () => {
                 variant="accent"
                 className="group"
               >
-                Deploy Logic
+                Get Started
                 <ArrowUpRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Button>
               <Button
                 variant="outline"
-                href="/primitives"
+                href="#growth-stack"
               >
-                Explore Primitives
-                <ArrowUpRight className="w-4 h-4 ml-2" />
+                See How It Works
+                <ChevronDown className="w-4 h-4 ml-2" />
               </Button>
             </div>
 
@@ -205,17 +205,17 @@ function SolutionSection() {
             </div>
 
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-medium text-black mb-6 max-w-4xl leading-[1.1] tracking-tight">
-              Engineering Protocol
+              Built for DeFi&apos;s
               <br />
-              <span className="text-black/40">Equilibrium</span>
+              <span className="text-black/40">Hardest Problems</span>
             </h2>
 
             <p className="text-lg md:text-xl text-black/60 max-w-2xl">
-              Every sector has a systemic flaw. Torque provides the diagnostics to find the leak and the primitives to fix it.
+              Every sector has a systemic flaw that generic incentives can&apos;t fix. Torque diagnoses the root cause and deploys targeted primitives to solve it.
             </p>
           </div>
           <Button variant="outline" href="/solutions" className="w-fit">
-            View Solutions
+            See All Solutions
             <ArrowUpRight className="w-4 h-4 ml-2" />
           </Button>
         </div>
@@ -272,15 +272,20 @@ function SolutionCard({ icon: Icon, title, subtitle, filename, visual: Visual, d
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="relative rounded-[3px] overflow-hidden group border border-black/10 hover:border-blue/30 transition-all min-h-[780px]" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-      {/* Procedural visual background - visible on hover */}
-      <div className="absolute inset-0 opacity-15 group-hover:opacity-100 transition-opacity duration-500">
-        <Visual color="#0000FF" paused={!isHovered} />
+    <div className="relative rounded-[3px] overflow-hidden group border border-black/10 hover:border-blue/30 transition-all" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+      {/* Visual area — always visible */}
+      <div className="relative h-48 md:h-56 overflow-hidden bg-gray-50">
+        <div className="absolute inset-0 opacity-40 group-hover:opacity-100 transition-opacity duration-500">
+          <Visual color="#0000FF" paused={!isHovered} />
+        </div>
+        {/* Product screenshot placeholder — replace with real screenshots */}
+        <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+          <div className="w-4/5 h-3/4 rounded-[2px] border border-dashed border-black/10 group-hover:border-blue/20 transition-colors flex items-center justify-center">
+            <span className="font-mono text-[9px] text-black/20 uppercase tracking-wider">Product Preview</span>
+          </div>
+        </div>
+        <ImageGradient className="bg-gradient-to-t from-white via-transparent to-transparent" />
       </div>
-
-      {/* White gradient overlay */}
-      <ImageGradient className="bg-gradient-to-t from-white via-white/85 to-white/60" />
-      <ImageGradient className="bg-gradient-to-br from-white/40 via-transparent to-transparent" />
 
       {/* Terminal Header */}
       <div className="absolute top-0 left-0 right-0 flex items-center gap-1.5 px-3 py-1.5 z-10">
@@ -289,34 +294,32 @@ function SolutionCard({ icon: Icon, title, subtitle, filename, visual: Visual, d
       </div>
 
       {/* Content */}
-      <div className="absolute inset-0 z-10 flex flex-col p-4 pt-8">
-        <div className="mt-auto">
-          <div className="w-8 h-8 rounded-[3px] bg-white/80 backdrop-blur-sm flex items-center justify-center mb-3 group-hover:bg-blue/10 transition-colors">
-            <Icon className="w-4 h-4 text-black group-hover:text-blue transition-colors" />
-          </div>
-
-          <h3 className="font-display text-base md:text-lg font-medium text-black mb-1 group-hover:text-blue transition-colors">
-            {title}
-          </h3>
-          <p className="text-[10px] font-mono uppercase tracking-wider text-black/50 mb-3">
-            {subtitle}
-          </p>
-
-          <div className="space-y-2 mb-4">
-            <div className="bg-white/60 backdrop-blur-sm p-3 border-l-2 border-black/20 rounded-r-[2px]">
-              <span className="text-[9px] font-mono uppercase tracking-wider text-black/40 block mb-0.5">diagnosis</span>
-              <p className="text-xs text-black/70">{diagnosis}</p>
-            </div>
-            <div className="bg-white/60 backdrop-blur-sm p-3 border-l-2 border-blue rounded-r-[2px]">
-              <span className="text-[9px] font-mono uppercase tracking-wider text-black/40 block mb-0.5">the fix</span>
-              <p className="text-xs text-black">{fix}</p>
-            </div>
-          </div>
-
-          <a href="/playbooks" className="inline-flex items-center text-xs text-blue hover:text-black transition-colors font-medium">
-            View Strategy <ArrowUpRight className="w-3 h-3 ml-1" />
-          </a>
+      <div className="p-4">
+        <div className="w-8 h-8 rounded-[3px] bg-white backdrop-blur-sm flex items-center justify-center mb-3 border border-black/5 group-hover:bg-blue/10 group-hover:border-blue/20 transition-colors">
+          <Icon className="w-4 h-4 text-black group-hover:text-blue transition-colors" />
         </div>
+
+        <h3 className="font-display text-base md:text-lg font-medium text-black mb-1 group-hover:text-blue transition-colors">
+          {title}
+        </h3>
+        <p className="text-[10px] font-mono uppercase tracking-wider text-black/50 mb-3">
+          {subtitle}
+        </p>
+
+        <div className="space-y-2 mb-4">
+          <div className="bg-gray-50 p-3 border-l-2 border-black/20 rounded-r-[2px]">
+            <span className="text-[9px] font-mono uppercase tracking-wider text-black/40 block mb-0.5">diagnosis</span>
+            <p className="text-xs text-black/70">{diagnosis}</p>
+          </div>
+          <div className="bg-blue/5 p-3 border-l-2 border-blue rounded-r-[2px]">
+            <span className="text-[9px] font-mono uppercase tracking-wider text-black/40 block mb-0.5">the fix</span>
+            <p className="text-xs text-black">{fix}</p>
+          </div>
+        </div>
+
+        <a href="/playbooks" className="inline-flex items-center text-xs text-blue hover:text-black transition-colors font-medium">
+          View Case Study <ArrowUpRight className="w-3 h-3 ml-1" />
+        </a>
       </div>
     </div>
   );
@@ -344,23 +347,23 @@ function HomepageCTA({ onOpenModal }: HomepageCTAProps) {
       >
         <div className="inline-flex items-center gap-2 mb-3 font-mono text-[10px] uppercase tracking-wider text-black/40">
           <Rocket className="w-3 h-3" />
-          Ready to Deploy?
+          Get Started
         </div>
         <h2 className="font-display text-2xl sm:text-3xl font-medium text-black leading-[1.1] tracking-tight mb-4">
-          Ready to engineer
+          Stop guessing.
           <br />
-          <span className="text-black/40">protocol equilibrium?</span>
+          <span className="text-black/40">Start engineering growth.</span>
         </h2>
         <p className="text-base text-black/60 mb-6">
-          Torque exists to replace &ldquo;vibes-based&rdquo; marketing with deterministic, programmable ROI. No waste. Just growth.
+          Protocols using Torque see measurable improvements in retention and capital efficiency within weeks—not months. Replace spray-and-pray incentives with programmable, data-driven growth.
         </p>
         <div className="flex flex-wrap items-center gap-4">
           <Button variant="accent" onClick={onOpenModal}>
-            Deploy Logic
+            Request Integration
             <ArrowUpRight className="w-4 h-4 ml-2" />
           </Button>
-          <Button variant="outline" href="/primitives">
-            Explore Primitives
+          <Button variant="outline" href="https://docs.torque.so">
+            Read the Docs
             <ArrowUpRight className="w-4 h-4 ml-2" />
           </Button>
         </div>

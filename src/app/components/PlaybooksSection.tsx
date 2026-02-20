@@ -32,7 +32,7 @@ export default function PlaybooksSection() {
               <span className="text-black/40">Strategies</span>
             </h2>
             <p className="text-base md:text-lg text-black/60 mt-4 max-w-xl">
-              Proven growth frameworks from top DeFi protocols.
+              Proven growth frameworks used by top Solana protocols. Deploy in minutes, not weeks.
             </p>
           </div>
           <Button variant="outline" href="/playbooks" className="w-fit">
@@ -66,18 +66,23 @@ function PlaybookCard({ playbook }: PlaybookCardProps) {
   return (
     <a
       href="/playbooks"
-      className="group relative rounded-[3px] overflow-hidden border border-black/10 hover:border-blue/30 transition-all min-h-[720px]"
+      className="group relative rounded-[3px] overflow-hidden border border-black/10 hover:border-blue/30 transition-all"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Procedural visual background - visible on hover */}
-      <div className="absolute inset-0 opacity-15 group-hover:opacity-100 transition-opacity duration-500">
-        {React.createElement(visualComponents[playbook.visualType], { color: "#0000FF", paused: !isHovered })}
+      {/* Visual area — always visible */}
+      <div className="relative h-44 md:h-52 overflow-hidden bg-gray-50">
+        <div className="absolute inset-0 opacity-40 group-hover:opacity-100 transition-opacity duration-500">
+          {React.createElement(visualComponents[playbook.visualType], { color: "#0000FF", paused: !isHovered })}
+        </div>
+        {/* Product screenshot placeholder */}
+        <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+          <div className="w-4/5 h-3/4 rounded-[2px] border border-dashed border-black/10 group-hover:border-blue/20 transition-colors flex items-center justify-center">
+            <span className="font-mono text-[9px] text-black/20 uppercase tracking-wider">Product Preview</span>
+          </div>
+        </div>
+        <ImageGradient className="bg-gradient-to-t from-white via-transparent to-transparent" />
       </div>
-
-      {/* White gradient overlay */}
-      <ImageGradient className="bg-gradient-to-t from-white via-white/85 to-white/60" />
-      <ImageGradient className="bg-gradient-to-br from-white/40 via-transparent to-transparent" />
 
       {/* Card Header */}
       <div className="absolute top-0 left-0 right-0 flex items-center gap-1.5 px-3 py-1.5 z-10">
@@ -88,31 +93,29 @@ function PlaybookCard({ playbook }: PlaybookCardProps) {
       </div>
 
       {/* Card Body */}
-      <div className="absolute inset-0 z-10 flex flex-col p-4 pt-8">
-        <div className="mt-auto">
-          <div className="w-8 h-8 rounded-[3px] bg-white/80 backdrop-blur-sm flex items-center justify-center mb-3 group-hover:bg-blue/10 transition-colors">
-            <Icon className="w-4 h-4 text-black group-hover:text-blue transition-colors" />
-          </div>
-
-          <h3 className="font-display text-base md:text-lg font-medium text-black mb-1 group-hover:text-blue transition-colors">
-            {playbook.title}
-          </h3>
-
-          <p className="text-xs text-black/60 leading-relaxed mb-3">
-            {playbook.description}
-          </p>
-
-          {/* Formula or Metric */}
-          {playbook.formula ? (
-            <PlaybookFormula formula={playbook.formula} />
-          ) : playbook.metricBadge ? (
-            <div className="pt-3 border-t border-black/10">
-              <span className="inline-flex items-center px-2 py-1 bg-white/80 backdrop-blur-sm text-blue text-xs font-medium rounded-[2px]">
-                {playbook.metricBadge}
-              </span>
-            </div>
-          ) : null}
+      <div className="p-4">
+        <div className="w-8 h-8 rounded-[3px] bg-white backdrop-blur-sm flex items-center justify-center mb-3 border border-black/5 group-hover:bg-blue/10 group-hover:border-blue/20 transition-colors">
+          <Icon className="w-4 h-4 text-black group-hover:text-blue transition-colors" />
         </div>
+
+        <h3 className="font-display text-base md:text-lg font-medium text-black mb-1 group-hover:text-blue transition-colors">
+          {playbook.title}
+        </h3>
+
+        <p className="text-xs text-black/60 leading-relaxed mb-3">
+          {playbook.description}
+        </p>
+
+        {/* Formula or Metric */}
+        {playbook.formula ? (
+          <PlaybookFormula formula={playbook.formula} />
+        ) : playbook.metricBadge ? (
+          <div className="pt-3 border-t border-black/10">
+            <span className="inline-flex items-center px-2 py-1 bg-blue/5 text-blue text-xs font-medium rounded-[2px]">
+              {playbook.metricBadge}
+            </span>
+          </div>
+        ) : null}
       </div>
     </a>
   );

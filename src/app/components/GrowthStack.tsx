@@ -29,11 +29,11 @@ export default function GrowthStack() {
               <span className="text-black/40">Engine</span>
             </h2>
             <p className="text-base md:text-lg text-black/60 mt-4 max-w-xl">
-              An onchain CRM and incentive engine designed to identify, predict, and retain high-value participants with surgical precision.
+              Set precise conditions for who gets rewarded and why. Target the exact behaviors that drive protocol growth—not vanity metrics.
             </p>
           </div>
-          <Button variant="outline" href="/platform" className="w-fit">
-            Explore Platform
+          <Button variant="outline" href="https://docs.torque.so" className="w-fit">
+            Read the Docs
             <ArrowUpRight className="w-4 h-4 ml-2" />
           </Button>
         </div>
@@ -120,14 +120,14 @@ function FeatureCard({
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className={`relative rounded-[3px] group h-full border transition-all overflow-hidden ${large ? "min-h-[392px]" : "min-h-[336px]"} ${featured ? "border-blue/20 hover:border-blue/40 shadow-[0_0_40px_-10px_rgba(0,122,255,0.15)]" : "border-black/5 hover:border-black/15"}`} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+    <div className={`relative rounded-[3px] group h-full border transition-all overflow-hidden ${large ? "min-h-[320px]" : "min-h-[280px]"} ${featured ? "border-blue/20 hover:border-blue/40 shadow-[0_0_40px_-10px_rgba(0,122,255,0.15)]" : "border-black/5 hover:border-black/15"}`} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
 
-      {/* Procedural visual background - hidden by default, visible on hover */}
-      <div className="absolute inset-0 opacity-15 group-hover:opacity-100 transition-opacity duration-500">{visual && React.cloneElement(visual, { paused: !isHovered })}</div>
+      {/* Procedural visual background - always partially visible */}
+      <div className="absolute inset-0 opacity-30 group-hover:opacity-100 transition-opacity duration-500">{visual && React.cloneElement(visual, { paused: !isHovered })}</div>
 
       {/* White gradient overlay */}
-      <ImageGradient className={featured ? "bg-gradient-to-t from-white via-white/85 to-white/60" : "bg-gradient-to-t from-white via-white/90 to-white/70"} />
-      <ImageGradient className="bg-gradient-to-br from-white/50 via-transparent to-transparent" />
+      <ImageGradient className={featured ? "bg-gradient-to-t from-white via-white/85 to-white/50" : "bg-gradient-to-t from-white via-white/90 to-white/60"} />
+      <ImageGradient className="bg-gradient-to-br from-white/40 via-transparent to-transparent" />
 
       {/* Terminal Header */}
       <div className="absolute top-0 left-0 right-0 flex items-center gap-1.5 px-3 py-1.5 z-10">
@@ -183,16 +183,16 @@ function APICard() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="relative rounded-[3px] group h-full border border-black/5 hover:border-black/15 transition-colors overflow-hidden min-h-[280px]" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+    <div className="relative rounded-[3px] group h-full border border-black/5 hover:border-black/15 transition-colors overflow-hidden min-h-[240px]" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
 
-      {/* Procedural visual background - hidden by default, visible on hover */}
-      <div className="absolute inset-0 opacity-15 group-hover:opacity-100 transition-opacity duration-500">
+      {/* Procedural visual background - always partially visible */}
+      <div className="absolute inset-0 opacity-30 group-hover:opacity-100 transition-opacity duration-500">
         <CircuitPattern color="#0000FF" paused={!isHovered} />
       </div>
 
       {/* White gradient overlay */}
-      <ImageGradient className="bg-gradient-to-t from-white via-white/90 to-white/70" />
-      <ImageGradient className="bg-gradient-to-br from-white/50 via-transparent to-transparent" />
+      <ImageGradient className="bg-gradient-to-t from-white via-white/90 to-white/60" />
+      <ImageGradient className="bg-gradient-to-br from-white/40 via-transparent to-transparent" />
 
       {/* Terminal Header */}
       <div className="absolute top-0 left-0 right-0 flex items-center gap-1.5 px-3 py-1.5 z-10">
