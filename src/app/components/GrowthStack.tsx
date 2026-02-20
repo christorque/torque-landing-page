@@ -1,13 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Code, Trophy, Brain, Zap, ArrowUpRight, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SmartImage } from "@/components/ascii/SmartImage";
 import { ImageGradient } from "@/components/ascii/ImageGradient";
-import { RewardFlow } from "@/components/card-visuals/RewardFlow";
-import { RankOrbit } from "@/components/card-visuals/RankOrbit";
-import { NeuralPulse } from "@/components/card-visuals/NeuralPulse";
-import { CircuitPattern } from "@/components/card-visuals/CircuitPattern";
 
 // =============================================================================
 // Growth Stack Section
@@ -46,7 +43,8 @@ export default function GrowthStack() {
               icon={Code}
               title="Programmable Rewards"
               description='Set conditions like "only reward users who hold >$1K and traded 3+ times this week." No more paying for bots or one-time farmers.'
-              visual={<RewardFlow color="#0000FF" />}
+              image="/generated/image/mono-3d/glass-cube-stack.jpg"
+              imageAlt="Code editor showing programmable reward logic"
               filename="rewards.config"
               features={[
                 { icon: Zap, label: "Conditional Logic" },
@@ -63,7 +61,8 @@ export default function GrowthStack() {
               icon={Trophy}
               title="Leaderboards"
               description="Real-time rankings turn passive holders into competing power users."
-              visual={<RankOrbit color="#0000FF" competitorCount={6} />}
+              image="/generated/image/mono-3d/ascending-bars.jpg"
+              imageAlt="Leaderboard interface"
               filename="leaderboard.tsx"
               metric="2.1x volume increase"
             />
@@ -75,7 +74,8 @@ export default function GrowthStack() {
               icon={Brain}
               title="AI Insights"
               description='Ask "Which wallets are about to churn?" and get actionable recommendations.'
-              visual={<NeuralPulse color="#0000FF" nodeCount={10} />}
+              image="/generated/image/mono-3d/data-stream.jpg"
+              imageAlt="AI neural network visualization"
               filename="intelligence.ai"
               metric="Predictive analytics"
             />
@@ -98,7 +98,8 @@ interface FeatureCardProps {
   icon: React.ComponentType<{ className?: string }>;
   title: string;
   description: string;
-  visual?: React.ReactElement;
+  image: string;
+  imageAlt: string;
   filename: string;
   features?: Array<{ icon?: React.ComponentType<{ className?: string }>; dot?: boolean; label: string }>;
   metric?: string;
@@ -110,20 +111,20 @@ function FeatureCard({
   icon: Icon,
   title,
   description,
-  visual,
+  image,
   filename,
   features,
   metric,
   large,
   featured,
 }: FeatureCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <div className={`relative rounded-[3px] group h-full border transition-all overflow-hidden ${large ? "min-h-[392px]" : "min-h-[336px]"} ${featured ? "border-blue/20 hover:border-blue/40 shadow-[0_0_40px_-10px_rgba(0,122,255,0.15)]" : "border-black/5 hover:border-black/15"}`} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+    <div className={`relative rounded-[3px] group h-full border transition-all overflow-hidden ${large ? "min-h-[392px]" : "min-h-[336px]"} ${featured ? "border-blue/20 hover:border-blue/40 shadow-[0_0_40px_-10px_rgba(0,122,255,0.15)]" : "border-black/5 hover:border-black/15"}`}>
 
-      {/* Procedural visual background - hidden by default, visible on hover */}
-      <div className="absolute inset-0 opacity-15 group-hover:opacity-100 transition-opacity duration-500">{visual && React.cloneElement(visual, { paused: !isHovered })}</div>
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <SmartImage src={image} alt={title} fill className="object-cover" />
+      </div>
 
       {/* White gradient overlay */}
       <ImageGradient className={featured ? "bg-gradient-to-t from-white via-white/85 to-white/60" : "bg-gradient-to-t from-white via-white/90 to-white/70"} />
@@ -180,14 +181,12 @@ function FeatureCard({
 // API Card Component
 // =============================================================================
 function APICard() {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <div className="relative rounded-[3px] group h-full border border-black/5 hover:border-black/15 transition-colors overflow-hidden min-h-[280px]" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+    <div className="relative rounded-[3px] group h-full border border-black/5 hover:border-black/15 transition-colors overflow-hidden min-h-[280px]">
 
-      {/* Procedural visual background - hidden by default, visible on hover */}
-      <div className="absolute inset-0 opacity-15 group-hover:opacity-100 transition-opacity duration-500">
-        <CircuitPattern color="#0000FF" paused={!isHovered} />
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <SmartImage src="/generated/image/mono-3d/network-grid.jpg" alt="Network grid" fill className="object-cover" />
       </div>
 
       {/* White gradient overlay */}
