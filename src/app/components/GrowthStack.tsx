@@ -1,9 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Code, Trophy, Brain, Zap, ArrowUpRight, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { IncentivesMockup, UsersTableMockup, RetentionMatrixMockup } from "@/components/product-mockups";
+import { ImageGradient } from "@/components/ascii/ImageGradient";
+import { RewardFlow } from "@/components/card-visuals/RewardFlow";
+import { RankOrbit } from "@/components/card-visuals/RankOrbit";
+import { NeuralPulse } from "@/components/card-visuals/NeuralPulse";
+import { CircuitPattern } from "@/components/card-visuals/CircuitPattern";
 
 // =============================================================================
 // Growth Stack Section
@@ -42,7 +46,7 @@ export default function GrowthStack() {
               icon={Code}
               title="Programmable Rewards"
               description='Set conditions like "only reward users who hold >$1K and traded 3+ times this week." No more paying for bots or one-time farmers.'
-              mockup={<IncentivesMockup />}
+              visual={<RewardFlow color="#0000FF" />}
               filename="rewards.config"
               features={[
                 { icon: Zap, label: "Conditional Logic" },
@@ -59,7 +63,7 @@ export default function GrowthStack() {
               icon={Trophy}
               title="Leaderboards"
               description="Real-time rankings turn passive holders into competing power users."
-              mockup={<UsersTableMockup />}
+              visual={<RankOrbit color="#0000FF" competitorCount={6} />}
               filename="leaderboard.tsx"
               metric="2.1x volume increase"
             />
@@ -71,7 +75,7 @@ export default function GrowthStack() {
               icon={Brain}
               title="AI Insights"
               description='Ask "Which wallets are about to churn?" and get actionable recommendations.'
-              mockup={<RetentionMatrixMockup />}
+              visual={<NeuralPulse color="#0000FF" nodeCount={10} />}
               filename="intelligence.ai"
               metric="Predictive analytics"
             />
@@ -94,7 +98,7 @@ interface FeatureCardProps {
   icon: React.ComponentType<{ className?: string }>;
   title: string;
   description: string;
-  mockup?: React.ReactElement;
+  visual?: React.ReactElement;
   filename: string;
   features?: Array<{ icon?: React.ComponentType<{ className?: string }>; dot?: boolean; label: string }>;
   metric?: string;
@@ -106,65 +110,67 @@ function FeatureCard({
   icon: Icon,
   title,
   description,
-  mockup,
+  visual,
   filename,
   features,
   metric,
   large,
   featured,
 }: FeatureCardProps) {
-  return (
-    <div className={`relative rounded-[3px] group h-full border transition-all overflow-hidden ${featured ? "border-blue/20 hover:border-blue/40 shadow-[0_0_40px_-10px_rgba(0,122,255,0.15)]" : "border-black/5 hover:border-black/15"}`}>
+  const [isHovered, setIsHovered] = useState(false);
 
-      {/* Product mockup area */}
-      <div className={`relative overflow-hidden bg-gray-50/50 border-b border-black/5 ${large ? "h-[220px]" : "h-[200px]"}`}>
-        {/* Terminal Header */}
-        <div className="absolute top-0 left-0 right-0 flex items-center gap-1.5 px-3 py-1.5 z-10">
-          <span className="w-1.5 h-1.5 rounded-full bg-black/20" />
-          <span className="font-mono text-[9px] text-black/30">{filename}</span>
-        </div>
-        {/* Mockup content */}
-        <div className="absolute inset-0 pt-5 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
-          {mockup}
-        </div>
-        {/* Subtle bottom gradient */}
-        <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-white to-transparent" />
+  return (
+    <div className={`relative rounded-[3px] group h-full border transition-all overflow-hidden ${large ? "min-h-[320px]" : "min-h-[280px]"} ${featured ? "border-blue/20 hover:border-blue/40 shadow-[0_0_40px_-10px_rgba(0,122,255,0.15)]" : "border-black/5 hover:border-black/15"}`} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+
+      {/* Procedural visual background - always partially visible */}
+      <div className="absolute inset-0 opacity-30 group-hover:opacity-100 transition-opacity duration-500">{visual && React.cloneElement(visual, { paused: !isHovered })}</div>
+
+      {/* White gradient overlay */}
+      <ImageGradient className={featured ? "bg-gradient-to-t from-white via-white/85 to-white/50" : "bg-gradient-to-t from-white via-white/90 to-white/60"} />
+      <ImageGradient className="bg-gradient-to-br from-white/40 via-transparent to-transparent" />
+
+      {/* Terminal Header */}
+      <div className="absolute top-0 left-0 right-0 flex items-center gap-1.5 px-3 py-1.5 z-10">
+        <span className="w-1.5 h-1.5 rounded-full bg-black/20" />
+        <span className="font-mono text-[9px] text-black/30">{filename}</span>
       </div>
 
       {/* Content */}
-      <div className="p-4">
-        <div className={`w-8 h-8 rounded-[3px] flex items-center justify-center mb-3 transition-colors border ${featured ? "bg-blue/10 border-blue/20 group-hover:bg-blue/20" : "bg-white border-black/5 group-hover:bg-blue/10 group-hover:border-blue/20"}`}>
-          <Icon className={`w-4 h-4 transition-colors ${featured ? "text-blue" : "text-black group-hover:text-blue"}`} />
+      <div className="absolute inset-0 z-10 flex flex-col p-4 pt-8">
+        <div className="mt-auto">
+          <div className={`w-8 h-8 rounded-[3px] backdrop-blur-sm flex items-center justify-center mb-3 transition-colors ${featured ? "bg-blue/15 group-hover:bg-blue/25" : "bg-white/80 group-hover:bg-blue/10"}`}>
+            <Icon className={`w-4 h-4 transition-colors ${featured ? "text-blue" : "text-black group-hover:text-blue"}`} />
+          </div>
+
+          <h3 className="font-display text-base md:text-lg font-medium mb-1 text-black group-hover:text-blue transition-colors">
+            {title}
+          </h3>
+
+          <p className="text-black/60 text-xs leading-relaxed mb-3">
+            {description}
+          </p>
+
+          {features && (
+            <div className="pt-3 border-t border-black/10 flex items-center gap-4">
+              {features.map((feature, index) => (
+                <div key={index} className="flex items-center gap-1.5 text-[10px] text-black/50">
+                  {feature.icon && <feature.icon className="w-3 h-3" />}
+                  {feature.dot && <span className="w-1 h-1 bg-blue rounded-full" />}
+                  <span className="font-mono">{feature.label}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {metric && (
+            <div className="pt-3 border-t border-black/10">
+              <span className="inline-flex items-center text-xs font-medium text-blue">
+                {metric}
+                <ArrowUpRight className="w-3 h-3 ml-1" />
+              </span>
+            </div>
+          )}
         </div>
-
-        <h3 className="font-display text-base md:text-lg font-medium mb-1 text-black group-hover:text-blue transition-colors">
-          {title}
-        </h3>
-
-        <p className="text-black/60 text-xs leading-relaxed mb-3">
-          {description}
-        </p>
-
-        {features && (
-          <div className="pt-3 border-t border-black/10 flex items-center gap-4">
-            {features.map((feature, index) => (
-              <div key={index} className="flex items-center gap-1.5 text-[10px] text-black/50">
-                {feature.icon && <feature.icon className="w-3 h-3" />}
-                {feature.dot && <span className="w-1 h-1 bg-blue rounded-full" />}
-                <span className="font-mono">{feature.label}</span>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {metric && (
-          <div className="pt-3 border-t border-black/10">
-            <span className="inline-flex items-center text-xs font-medium text-blue">
-              {metric}
-              <ArrowUpRight className="w-3 h-3 ml-1" />
-            </span>
-          </div>
-        )}
       </div>
     </div>
   );

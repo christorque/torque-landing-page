@@ -10,8 +10,11 @@ import TrustBar from "./TrustBar";
 import GrowthStack from "./GrowthStack";
 import PlaybooksSection from "./PlaybooksSection";
 import { heroStats, heroRotatingPhrases } from "@/app/data/stats";
+import { ImageGradient } from "@/components/ascii/ImageGradient";
+import { VelocityFlow } from "@/components/card-visuals/VelocityFlow";
+import { LiquidityPool } from "@/components/card-visuals/LiquidityPool";
+import { RetentionLoop } from "@/components/card-visuals/RetentionLoop";
 import { TorqueHelicoid } from "@/components/three/TorqueHelicoid";
-import { ReportingOverviewMockup, UserDetailMockup, ReportingChartsMockup } from "@/components/product-mockups";
 
 // =============================================================================
 // Interactive Gradient Background with Particle Mesh
@@ -224,7 +227,7 @@ function SolutionSection() {
             title="Lending"
             subtitle="Targeted Liquidity Injection"
             filename="lending.strategy"
-            mockup={<ReportingOverviewMockup />}
+            visual={LiquidityPool}
             diagnosis="The Utilization Paradox (High TVL / Low Borrowing)"
             fix="Reward 'First-Time' LPs with duration-weighted bonuses to prime the pump."
           />
@@ -233,7 +236,7 @@ function SolutionSection() {
             title="Perps"
             subtitle="Habit Formation Architecture"
             filename="perps.strategy"
-            mockup={<UserDetailMockup />}
+            visual={RetentionLoop}
             diagnosis="The 'One-and-Done' Trader (High Churn)"
             fix="Incentivize 'Streaks' over raw volume to build habitual protocol usage."
           />
@@ -242,7 +245,7 @@ function SolutionSection() {
             title="Stablecoins"
             subtitle="Distribution Nodes"
             filename="stablecoin.strategy"
-            mockup={<ReportingChartsMockup />}
+            visual={VelocityFlow}
             diagnosis="The Velocity Gap ($175M+ Cap / 0 Velocity)"
             fix="Use referral rebates to turn passive holders into active transaction agents."
           />
@@ -260,56 +263,60 @@ interface SolutionCardProps {
   title: string;
   subtitle: string;
   filename: string;
-  mockup: React.ReactElement;
+  visual: React.ComponentType<{ color?: string; paused?: boolean }>;
   diagnosis: string;
   fix: string;
 }
 
-function SolutionCard({ icon: Icon, title, subtitle, filename, mockup, diagnosis, fix }: SolutionCardProps) {
+function SolutionCard({ icon: Icon, title, subtitle, filename, visual: Visual, diagnosis, fix }: SolutionCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <div className="relative rounded-[3px] overflow-hidden group border border-black/10 hover:border-blue/30 transition-all">
-      {/* Product mockup area */}
-      <div className="relative h-52 md:h-56 overflow-hidden bg-gray-50/50 border-b border-black/5">
-        {/* Terminal Header */}
-        <div className="absolute top-0 left-0 right-0 flex items-center gap-1.5 px-3 py-1.5 z-10">
-          <span className="w-1.5 h-1.5 rounded-full bg-black/20" />
-          <span className="font-mono text-[9px] text-black/30">{filename}</span>
-        </div>
-        {/* Mockup content */}
-        <div className="absolute inset-0 pt-5 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
-          {mockup}
-        </div>
-        {/* Subtle bottom gradient */}
-        <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-white to-transparent" />
+    <div className="relative rounded-[3px] overflow-hidden group border border-black/10 hover:border-blue/30 transition-all min-h-[480px]" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+      {/* Procedural visual background - always partially visible */}
+      <div className="absolute inset-0 opacity-30 group-hover:opacity-100 transition-opacity duration-500">
+        <Visual color="#0000FF" paused={!isHovered} />
+      </div>
+
+      {/* White gradient overlay */}
+      <ImageGradient className="bg-gradient-to-t from-white via-white/85 to-white/60" />
+      <ImageGradient className="bg-gradient-to-br from-white/40 via-transparent to-transparent" />
+
+      {/* Terminal Header */}
+      <div className="absolute top-0 left-0 right-0 flex items-center gap-1.5 px-3 py-1.5 z-10">
+        <span className="w-1.5 h-1.5 rounded-full bg-black/20" />
+        <span className="font-mono text-[9px] text-black/30">{filename}</span>
       </div>
 
       {/* Content */}
-      <div className="p-4">
-        <div className="w-8 h-8 rounded-[3px] bg-white flex items-center justify-center mb-3 border border-black/5 group-hover:bg-blue/10 group-hover:border-blue/20 transition-colors">
-          <Icon className="w-4 h-4 text-black group-hover:text-blue transition-colors" />
-        </div>
-
-        <h3 className="font-display text-base md:text-lg font-medium text-black mb-1 group-hover:text-blue transition-colors">
-          {title}
-        </h3>
-        <p className="text-[10px] font-mono uppercase tracking-wider text-black/50 mb-3">
-          {subtitle}
-        </p>
-
-        <div className="space-y-2 mb-4">
-          <div className="bg-gray-50 p-3 border-l-2 border-black/20 rounded-r-[2px]">
-            <span className="text-[9px] font-mono uppercase tracking-wider text-black/40 block mb-0.5">diagnosis</span>
-            <p className="text-xs text-black/70">{diagnosis}</p>
+      <div className="absolute inset-0 z-10 flex flex-col p-4 pt-8">
+        <div className="mt-auto">
+          <div className="w-8 h-8 rounded-[3px] bg-white/80 backdrop-blur-sm flex items-center justify-center mb-3 group-hover:bg-blue/10 transition-colors">
+            <Icon className="w-4 h-4 text-black group-hover:text-blue transition-colors" />
           </div>
-          <div className="bg-blue/5 p-3 border-l-2 border-blue rounded-r-[2px]">
-            <span className="text-[9px] font-mono uppercase tracking-wider text-black/40 block mb-0.5">the fix</span>
-            <p className="text-xs text-black">{fix}</p>
-          </div>
-        </div>
 
-        <a href="/playbooks" className="inline-flex items-center text-xs text-blue hover:text-black transition-colors font-medium">
-          View Case Study <ArrowUpRight className="w-3 h-3 ml-1" />
-        </a>
+          <h3 className="font-display text-base md:text-lg font-medium text-black mb-1 group-hover:text-blue transition-colors">
+            {title}
+          </h3>
+          <p className="text-[10px] font-mono uppercase tracking-wider text-black/50 mb-3">
+            {subtitle}
+          </p>
+
+          <div className="space-y-2 mb-4">
+            <div className="bg-white/60 backdrop-blur-sm p-3 border-l-2 border-black/20 rounded-r-[2px]">
+              <span className="text-[9px] font-mono uppercase tracking-wider text-black/40 block mb-0.5">diagnosis</span>
+              <p className="text-xs text-black/70">{diagnosis}</p>
+            </div>
+            <div className="bg-white/60 backdrop-blur-sm p-3 border-l-2 border-blue rounded-r-[2px]">
+              <span className="text-[9px] font-mono uppercase tracking-wider text-black/40 block mb-0.5">the fix</span>
+              <p className="text-xs text-black">{fix}</p>
+            </div>
+          </div>
+
+          <a href="/playbooks" className="inline-flex items-center text-xs text-blue hover:text-black transition-colors font-medium">
+            View Case Study <ArrowUpRight className="w-3 h-3 ml-1" />
+          </a>
+        </div>
       </div>
     </div>
   );

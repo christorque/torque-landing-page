@@ -1,15 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { ArrowUpRight, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { featuredPlaybooks, type Playbook } from "@/app/data/playbooks";
-import { IncentivesMockup, UsersTableMockup, CampaignDashboardMockup } from "@/components/product-mockups";
+import { ImageGradient } from "@/components/ascii/ImageGradient";
+import { RafflePattern } from "@/components/card-visuals/RafflePattern";
+import { NetworkPattern } from "@/components/card-visuals/NetworkPattern";
+import { GrowthBars } from "@/components/card-visuals/GrowthBars";
 
-const mockupComponents: Record<Playbook["visualType"], React.ComponentType> = {
-  raffle: IncentivesMockup,
-  network: UsersTableMockup,
-  growth: CampaignDashboardMockup,
+const visualComponents: Record<Playbook["visualType"], React.ComponentType<{ color?: string; paused?: boolean }>> = {
+  raffle: RafflePattern,
+  network: NetworkPattern,
+  growth: GrowthBars,
 };
 
 export default function PlaybooksSection() {
@@ -57,55 +60,59 @@ interface PlaybookCardProps {
 }
 
 function PlaybookCard({ playbook }: PlaybookCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
   const Icon = playbook.icon;
-  const MockupComponent = mockupComponents[playbook.visualType];
 
   return (
     <a
       href="/playbooks"
-      className="group relative rounded-[3px] overflow-hidden border border-black/10 hover:border-blue/30 transition-all"
+      className="group relative rounded-[3px] overflow-hidden border border-black/10 hover:border-blue/30 transition-all min-h-[480px]"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Product mockup area */}
-      <div className="relative h-48 md:h-52 overflow-hidden bg-gray-50/50 border-b border-black/5">
-        {/* Terminal Header */}
-        <div className="absolute top-0 left-0 right-0 flex items-center gap-1.5 px-3 py-1.5 z-10">
-          <span className="w-1.5 h-1.5 rounded-full bg-black/20" />
-          <span className="font-mono text-[9px] text-black/30">
-            {playbook.type === "CASE_STUDY" ? "case_study" : playbook.type.toLowerCase()}.{playbook.sector.toLowerCase()}
-          </span>
-        </div>
-        {/* Mockup content */}
-        <div className="absolute inset-0 pt-5 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
-          <MockupComponent />
-        </div>
-        {/* Subtle bottom gradient */}
-        <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-white to-transparent" />
+      {/* Procedural visual background - always partially visible */}
+      <div className="absolute inset-0 opacity-30 group-hover:opacity-100 transition-opacity duration-500">
+        {React.createElement(visualComponents[playbook.visualType], { color: "#0000FF", paused: !isHovered })}
+      </div>
+
+      {/* White gradient overlay */}
+      <ImageGradient className="bg-gradient-to-t from-white via-white/85 to-white/60" />
+      <ImageGradient className="bg-gradient-to-br from-white/40 via-transparent to-transparent" />
+
+      {/* Card Header */}
+      <div className="absolute top-0 left-0 right-0 flex items-center gap-1.5 px-3 py-1.5 z-10">
+        <span className="w-1.5 h-1.5 rounded-full bg-black/20" />
+        <span className="font-mono text-[9px] text-black/30">
+          {playbook.type === "CASE_STUDY" ? "case_study" : playbook.type.toLowerCase()}.{playbook.sector.toLowerCase()}
+        </span>
       </div>
 
       {/* Card Body */}
-      <div className="p-4">
-        <div className="w-8 h-8 rounded-[3px] bg-white flex items-center justify-center mb-3 border border-black/5 group-hover:bg-blue/10 group-hover:border-blue/20 transition-colors">
-          <Icon className="w-4 h-4 text-black group-hover:text-blue transition-colors" />
-        </div>
-
-        <h3 className="font-display text-base md:text-lg font-medium text-black mb-1 group-hover:text-blue transition-colors">
-          {playbook.title}
-        </h3>
-
-        <p className="text-xs text-black/60 leading-relaxed mb-3">
-          {playbook.description}
-        </p>
-
-        {/* Formula or Metric */}
-        {playbook.formula ? (
-          <PlaybookFormula formula={playbook.formula} />
-        ) : playbook.metricBadge ? (
-          <div className="pt-3 border-t border-black/10">
-            <span className="inline-flex items-center px-2 py-1 bg-blue/5 text-blue text-xs font-medium rounded-[2px]">
-              {playbook.metricBadge}
-            </span>
+      <div className="absolute inset-0 z-10 flex flex-col p-4 pt-8">
+        <div className="mt-auto">
+          <div className="w-8 h-8 rounded-[3px] bg-white/80 backdrop-blur-sm flex items-center justify-center mb-3 group-hover:bg-blue/10 transition-colors">
+            <Icon className="w-4 h-4 text-black group-hover:text-blue transition-colors" />
           </div>
-        ) : null}
+
+          <h3 className="font-display text-base md:text-lg font-medium text-black mb-1 group-hover:text-blue transition-colors">
+            {playbook.title}
+          </h3>
+
+          <p className="text-xs text-black/60 leading-relaxed mb-3">
+            {playbook.description}
+          </p>
+
+          {/* Formula or Metric */}
+          {playbook.formula ? (
+            <PlaybookFormula formula={playbook.formula} />
+          ) : playbook.metricBadge ? (
+            <div className="pt-3 border-t border-black/10">
+              <span className="inline-flex items-center px-2 py-1 bg-blue/5 text-blue text-xs font-medium rounded-[2px]">
+                {playbook.metricBadge}
+              </span>
+            </div>
+          ) : null}
+        </div>
       </div>
     </a>
   );
