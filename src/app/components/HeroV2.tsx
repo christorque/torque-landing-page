@@ -10,11 +10,8 @@ import TrustBar from "./TrustBar";
 import GrowthStack from "./GrowthStack";
 import PlaybooksSection from "./PlaybooksSection";
 import { heroStats, heroRotatingPhrases } from "@/app/data/stats";
-import { ImageGradient } from "@/components/ascii/ImageGradient";
-import { VelocityFlow } from "@/components/card-visuals/VelocityFlow";
-import { LiquidityPool } from "@/components/card-visuals/LiquidityPool";
-import { RetentionLoop } from "@/components/card-visuals/RetentionLoop";
 import { TorqueHelicoid } from "@/components/three/TorqueHelicoid";
+import { ReportingOverviewMockup, UserDetailMockup, ReportingChartsMockup } from "@/components/product-mockups";
 
 // =============================================================================
 // Interactive Gradient Background with Particle Mesh
@@ -227,7 +224,7 @@ function SolutionSection() {
             title="Lending"
             subtitle="Targeted Liquidity Injection"
             filename="lending.strategy"
-            visual={LiquidityPool}
+            mockup={<ReportingOverviewMockup />}
             diagnosis="The Utilization Paradox (High TVL / Low Borrowing)"
             fix="Reward 'First-Time' LPs with duration-weighted bonuses to prime the pump."
           />
@@ -236,7 +233,7 @@ function SolutionSection() {
             title="Perps"
             subtitle="Habit Formation Architecture"
             filename="perps.strategy"
-            visual={RetentionLoop}
+            mockup={<UserDetailMockup />}
             diagnosis="The 'One-and-Done' Trader (High Churn)"
             fix="Incentivize 'Streaks' over raw volume to build habitual protocol usage."
           />
@@ -245,7 +242,7 @@ function SolutionSection() {
             title="Stablecoins"
             subtitle="Distribution Nodes"
             filename="stablecoin.strategy"
-            visual={VelocityFlow}
+            mockup={<ReportingChartsMockup />}
             diagnosis="The Velocity Gap ($175M+ Cap / 0 Velocity)"
             fix="Use referral rebates to turn passive holders into active transaction agents."
           />
@@ -263,39 +260,32 @@ interface SolutionCardProps {
   title: string;
   subtitle: string;
   filename: string;
-  visual: React.ComponentType<{ color?: string; paused?: boolean }>;
+  mockup: React.ReactElement;
   diagnosis: string;
   fix: string;
 }
 
-function SolutionCard({ icon: Icon, title, subtitle, filename, visual: Visual, diagnosis, fix }: SolutionCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
-
+function SolutionCard({ icon: Icon, title, subtitle, filename, mockup, diagnosis, fix }: SolutionCardProps) {
   return (
-    <div className="relative rounded-[3px] overflow-hidden group border border-black/10 hover:border-blue/30 transition-all" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-      {/* Visual area — always visible */}
-      <div className="relative h-48 md:h-56 overflow-hidden bg-gray-50">
-        <div className="absolute inset-0 opacity-40 group-hover:opacity-100 transition-opacity duration-500">
-          <Visual color="#0000FF" paused={!isHovered} />
+    <div className="relative rounded-[3px] overflow-hidden group border border-black/10 hover:border-blue/30 transition-all">
+      {/* Product mockup area */}
+      <div className="relative h-52 md:h-56 overflow-hidden bg-gray-50/50 border-b border-black/5">
+        {/* Terminal Header */}
+        <div className="absolute top-0 left-0 right-0 flex items-center gap-1.5 px-3 py-1.5 z-10">
+          <span className="w-1.5 h-1.5 rounded-full bg-black/20" />
+          <span className="font-mono text-[9px] text-black/30">{filename}</span>
         </div>
-        {/* Product screenshot placeholder — replace with real screenshots */}
-        <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-          <div className="w-4/5 h-3/4 rounded-[2px] border border-dashed border-black/10 group-hover:border-blue/20 transition-colors flex items-center justify-center">
-            <span className="font-mono text-[9px] text-black/20 uppercase tracking-wider">Product Preview</span>
-          </div>
+        {/* Mockup content */}
+        <div className="absolute inset-0 pt-5 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+          {mockup}
         </div>
-        <ImageGradient className="bg-gradient-to-t from-white via-transparent to-transparent" />
-      </div>
-
-      {/* Terminal Header */}
-      <div className="absolute top-0 left-0 right-0 flex items-center gap-1.5 px-3 py-1.5 z-10">
-        <span className="w-1.5 h-1.5 rounded-full bg-black/20" />
-        <span className="font-mono text-[9px] text-black/30">{filename}</span>
+        {/* Subtle bottom gradient */}
+        <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-white to-transparent" />
       </div>
 
       {/* Content */}
       <div className="p-4">
-        <div className="w-8 h-8 rounded-[3px] bg-white backdrop-blur-sm flex items-center justify-center mb-3 border border-black/5 group-hover:bg-blue/10 group-hover:border-blue/20 transition-colors">
+        <div className="w-8 h-8 rounded-[3px] bg-white flex items-center justify-center mb-3 border border-black/5 group-hover:bg-blue/10 group-hover:border-blue/20 transition-colors">
           <Icon className="w-4 h-4 text-black group-hover:text-blue transition-colors" />
         </div>
 

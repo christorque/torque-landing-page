@@ -1,18 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { ArrowUpRight, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { featuredPlaybooks, type Playbook } from "@/app/data/playbooks";
-import { ImageGradient } from "@/components/ascii/ImageGradient";
-import { RafflePattern } from "@/components/card-visuals/RafflePattern";
-import { NetworkPattern } from "@/components/card-visuals/NetworkPattern";
-import { GrowthBars } from "@/components/card-visuals/GrowthBars";
+import { IncentivesMockup, UsersTableMockup, CampaignDashboardMockup } from "@/components/product-mockups";
 
-const visualComponents: Record<Playbook["visualType"], React.ComponentType<{ color?: string; paused?: boolean }>> = {
-  raffle: RafflePattern,
-  network: NetworkPattern,
-  growth: GrowthBars,
+const mockupComponents: Record<Playbook["visualType"], React.ComponentType> = {
+  raffle: IncentivesMockup,
+  network: UsersTableMockup,
+  growth: CampaignDashboardMockup,
 };
 
 export default function PlaybooksSection() {
@@ -60,41 +57,34 @@ interface PlaybookCardProps {
 }
 
 function PlaybookCard({ playbook }: PlaybookCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
   const Icon = playbook.icon;
+  const MockupComponent = mockupComponents[playbook.visualType];
 
   return (
     <a
       href="/playbooks"
       className="group relative rounded-[3px] overflow-hidden border border-black/10 hover:border-blue/30 transition-all"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Visual area — always visible */}
-      <div className="relative h-44 md:h-52 overflow-hidden bg-gray-50">
-        <div className="absolute inset-0 opacity-40 group-hover:opacity-100 transition-opacity duration-500">
-          {React.createElement(visualComponents[playbook.visualType], { color: "#0000FF", paused: !isHovered })}
+      {/* Product mockup area */}
+      <div className="relative h-48 md:h-52 overflow-hidden bg-gray-50/50 border-b border-black/5">
+        {/* Terminal Header */}
+        <div className="absolute top-0 left-0 right-0 flex items-center gap-1.5 px-3 py-1.5 z-10">
+          <span className="w-1.5 h-1.5 rounded-full bg-black/20" />
+          <span className="font-mono text-[9px] text-black/30">
+            {playbook.type === "CASE_STUDY" ? "case_study" : playbook.type.toLowerCase()}.{playbook.sector.toLowerCase()}
+          </span>
         </div>
-        {/* Product screenshot placeholder */}
-        <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-          <div className="w-4/5 h-3/4 rounded-[2px] border border-dashed border-black/10 group-hover:border-blue/20 transition-colors flex items-center justify-center">
-            <span className="font-mono text-[9px] text-black/20 uppercase tracking-wider">Product Preview</span>
-          </div>
+        {/* Mockup content */}
+        <div className="absolute inset-0 pt-5 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+          <MockupComponent />
         </div>
-        <ImageGradient className="bg-gradient-to-t from-white via-transparent to-transparent" />
-      </div>
-
-      {/* Card Header */}
-      <div className="absolute top-0 left-0 right-0 flex items-center gap-1.5 px-3 py-1.5 z-10">
-        <span className="w-1.5 h-1.5 rounded-full bg-black/20" />
-        <span className="font-mono text-[9px] text-black/30">
-          {playbook.type === "CASE_STUDY" ? "case_study" : playbook.type.toLowerCase()}.{playbook.sector.toLowerCase()}
-        </span>
+        {/* Subtle bottom gradient */}
+        <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-white to-transparent" />
       </div>
 
       {/* Card Body */}
       <div className="p-4">
-        <div className="w-8 h-8 rounded-[3px] bg-white backdrop-blur-sm flex items-center justify-center mb-3 border border-black/5 group-hover:bg-blue/10 group-hover:border-blue/20 transition-colors">
+        <div className="w-8 h-8 rounded-[3px] bg-white flex items-center justify-center mb-3 border border-black/5 group-hover:bg-blue/10 group-hover:border-blue/20 transition-colors">
           <Icon className="w-4 h-4 text-black group-hover:text-blue transition-colors" />
         </div>
 

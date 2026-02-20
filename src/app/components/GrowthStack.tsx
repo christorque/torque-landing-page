@@ -1,13 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Code, Trophy, Brain, Zap, ArrowUpRight, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ImageGradient } from "@/components/ascii/ImageGradient";
-import { RewardFlow } from "@/components/card-visuals/RewardFlow";
-import { RankOrbit } from "@/components/card-visuals/RankOrbit";
-import { NeuralPulse } from "@/components/card-visuals/NeuralPulse";
-import { CircuitPattern } from "@/components/card-visuals/CircuitPattern";
+import { IncentivesMockup, UsersTableMockup, RetentionMatrixMockup } from "@/components/product-mockups";
 
 // =============================================================================
 // Growth Stack Section
@@ -46,7 +42,7 @@ export default function GrowthStack() {
               icon={Code}
               title="Programmable Rewards"
               description='Set conditions like "only reward users who hold >$1K and traded 3+ times this week." No more paying for bots or one-time farmers.'
-              visual={<RewardFlow color="#0000FF" />}
+              mockup={<IncentivesMockup />}
               filename="rewards.config"
               features={[
                 { icon: Zap, label: "Conditional Logic" },
@@ -63,7 +59,7 @@ export default function GrowthStack() {
               icon={Trophy}
               title="Leaderboards"
               description="Real-time rankings turn passive holders into competing power users."
-              visual={<RankOrbit color="#0000FF" competitorCount={6} />}
+              mockup={<UsersTableMockup />}
               filename="leaderboard.tsx"
               metric="2.1x volume increase"
             />
@@ -75,7 +71,7 @@ export default function GrowthStack() {
               icon={Brain}
               title="AI Insights"
               description='Ask "Which wallets are about to churn?" and get actionable recommendations.'
-              visual={<NeuralPulse color="#0000FF" nodeCount={10} />}
+              mockup={<RetentionMatrixMockup />}
               filename="intelligence.ai"
               metric="Predictive analytics"
             />
@@ -98,7 +94,7 @@ interface FeatureCardProps {
   icon: React.ComponentType<{ className?: string }>;
   title: string;
   description: string;
-  visual?: React.ReactElement;
+  mockup?: React.ReactElement;
   filename: string;
   features?: Array<{ icon?: React.ComponentType<{ className?: string }>; dot?: boolean; label: string }>;
   metric?: string;
@@ -110,67 +106,65 @@ function FeatureCard({
   icon: Icon,
   title,
   description,
-  visual,
+  mockup,
   filename,
   features,
   metric,
   large,
   featured,
 }: FeatureCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <div className={`relative rounded-[3px] group h-full border transition-all overflow-hidden ${large ? "min-h-[320px]" : "min-h-[280px]"} ${featured ? "border-blue/20 hover:border-blue/40 shadow-[0_0_40px_-10px_rgba(0,122,255,0.15)]" : "border-black/5 hover:border-black/15"}`} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+    <div className={`relative rounded-[3px] group h-full border transition-all overflow-hidden ${featured ? "border-blue/20 hover:border-blue/40 shadow-[0_0_40px_-10px_rgba(0,122,255,0.15)]" : "border-black/5 hover:border-black/15"}`}>
 
-      {/* Procedural visual background - always partially visible */}
-      <div className="absolute inset-0 opacity-30 group-hover:opacity-100 transition-opacity duration-500">{visual && React.cloneElement(visual, { paused: !isHovered })}</div>
-
-      {/* White gradient overlay */}
-      <ImageGradient className={featured ? "bg-gradient-to-t from-white via-white/85 to-white/50" : "bg-gradient-to-t from-white via-white/90 to-white/60"} />
-      <ImageGradient className="bg-gradient-to-br from-white/40 via-transparent to-transparent" />
-
-      {/* Terminal Header */}
-      <div className="absolute top-0 left-0 right-0 flex items-center gap-1.5 px-3 py-1.5 z-10">
-        <span className="w-1.5 h-1.5 rounded-full bg-black/20" />
-        <span className="font-mono text-[9px] text-black/30">{filename}</span>
+      {/* Product mockup area */}
+      <div className={`relative overflow-hidden bg-gray-50/50 border-b border-black/5 ${large ? "h-[220px]" : "h-[200px]"}`}>
+        {/* Terminal Header */}
+        <div className="absolute top-0 left-0 right-0 flex items-center gap-1.5 px-3 py-1.5 z-10">
+          <span className="w-1.5 h-1.5 rounded-full bg-black/20" />
+          <span className="font-mono text-[9px] text-black/30">{filename}</span>
+        </div>
+        {/* Mockup content */}
+        <div className="absolute inset-0 pt-5 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+          {mockup}
+        </div>
+        {/* Subtle bottom gradient */}
+        <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-white to-transparent" />
       </div>
 
       {/* Content */}
-      <div className="absolute inset-0 z-10 flex flex-col p-4 pt-8">
-        <div className="mt-auto">
-          <div className={`w-8 h-8 rounded-[3px] backdrop-blur-sm flex items-center justify-center mb-3 transition-colors ${featured ? "bg-blue/15 group-hover:bg-blue/25" : "bg-white/80 group-hover:bg-blue/10"}`}>
-            <Icon className={`w-4 h-4 transition-colors ${featured ? "text-blue" : "text-black group-hover:text-blue"}`} />
-          </div>
-
-          <h3 className="font-display text-base md:text-lg font-medium mb-1 text-black group-hover:text-blue transition-colors">
-            {title}
-          </h3>
-
-          <p className="text-black/60 text-xs leading-relaxed mb-3">
-            {description}
-          </p>
-
-          {features && (
-            <div className="pt-3 border-t border-black/10 flex items-center gap-4">
-              {features.map((feature, index) => (
-                <div key={index} className="flex items-center gap-1.5 text-[10px] text-black/50">
-                  {feature.icon && <feature.icon className="w-3 h-3" />}
-                  {feature.dot && <span className="w-1 h-1 bg-blue rounded-full" />}
-                  <span className="font-mono">{feature.label}</span>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {metric && (
-            <div className="pt-3 border-t border-black/10">
-              <span className="inline-flex items-center text-xs font-medium text-blue">
-                {metric}
-                <ArrowUpRight className="w-3 h-3 ml-1" />
-              </span>
-            </div>
-          )}
+      <div className="p-4">
+        <div className={`w-8 h-8 rounded-[3px] flex items-center justify-center mb-3 transition-colors border ${featured ? "bg-blue/10 border-blue/20 group-hover:bg-blue/20" : "bg-white border-black/5 group-hover:bg-blue/10 group-hover:border-blue/20"}`}>
+          <Icon className={`w-4 h-4 transition-colors ${featured ? "text-blue" : "text-black group-hover:text-blue"}`} />
         </div>
+
+        <h3 className="font-display text-base md:text-lg font-medium mb-1 text-black group-hover:text-blue transition-colors">
+          {title}
+        </h3>
+
+        <p className="text-black/60 text-xs leading-relaxed mb-3">
+          {description}
+        </p>
+
+        {features && (
+          <div className="pt-3 border-t border-black/10 flex items-center gap-4">
+            {features.map((feature, index) => (
+              <div key={index} className="flex items-center gap-1.5 text-[10px] text-black/50">
+                {feature.icon && <feature.icon className="w-3 h-3" />}
+                {feature.dot && <span className="w-1 h-1 bg-blue rounded-full" />}
+                <span className="font-mono">{feature.label}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {metric && (
+          <div className="pt-3 border-t border-black/10">
+            <span className="inline-flex items-center text-xs font-medium text-blue">
+              {metric}
+              <ArrowUpRight className="w-3 h-3 ml-1" />
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -180,30 +174,31 @@ function FeatureCard({
 // API Card Component
 // =============================================================================
 function APICard() {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <div className="relative rounded-[3px] group h-full border border-black/5 hover:border-black/15 transition-colors overflow-hidden min-h-[240px]" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+    <div className="relative rounded-[3px] group h-full border border-black/5 hover:border-black/15 transition-colors overflow-hidden">
+      <div className="flex flex-col md:flex-row h-full">
+        {/* Code preview area */}
+        <div className="relative flex-1 bg-gray-950 overflow-hidden border-b md:border-b-0 md:border-r border-black/10">
+          {/* Terminal Header */}
+          <div className="flex items-center gap-1.5 px-3 py-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
+            <span className="font-mono text-[9px] text-white/30">api.sdk</span>
+          </div>
+          <div className="px-3 pb-3 font-mono text-[9px] leading-relaxed select-none pointer-events-none">
+            <div className="text-white/30">{`// Create an incentive campaign`}</div>
+            <div><span className="text-blue-400">const</span> <span className="text-white/80">campaign</span> = <span className="text-blue-400">await</span> <span className="text-white/80">torque</span>.<span className="text-yellow-300">createCampaign</span>({`{`}</div>
+            <div className="pl-3"><span className="text-white/50">name:</span> <span className="text-green-400">&quot;Volume Raffle&quot;</span>,</div>
+            <div className="pl-3"><span className="text-white/50">trigger:</span> <span className="text-green-400">&quot;trade &gt; $100&quot;</span>,</div>
+            <div className="pl-3"><span className="text-white/50">reward:</span> {`{`} <span className="text-white/50">type:</span> <span className="text-green-400">&quot;raffle&quot;</span>, <span className="text-white/50">pool:</span> <span className="text-purple-300">10_000</span> {`}`},</div>
+            <div className="pl-3"><span className="text-white/50">filter:</span> {`{`} <span className="text-white/50">minHold:</span> <span className="text-purple-300">1000</span>, <span className="text-white/50">minTrades:</span> <span className="text-purple-300">3</span> {`}`},</div>
+            <div>{`}`});</div>
+            <div className="mt-1 text-white/30">{`// campaign.id → "torq_8f3k..."`}</div>
+          </div>
+        </div>
 
-      {/* Procedural visual background - always partially visible */}
-      <div className="absolute inset-0 opacity-30 group-hover:opacity-100 transition-opacity duration-500">
-        <CircuitPattern color="#0000FF" paused={!isHovered} />
-      </div>
-
-      {/* White gradient overlay */}
-      <ImageGradient className="bg-gradient-to-t from-white via-white/90 to-white/60" />
-      <ImageGradient className="bg-gradient-to-br from-white/40 via-transparent to-transparent" />
-
-      {/* Terminal Header */}
-      <div className="absolute top-0 left-0 right-0 flex items-center gap-1.5 px-3 py-1.5 z-10">
-        <span className="w-1.5 h-1.5 rounded-full bg-black/20" />
-        <span className="font-mono text-[9px] text-black/30">api.sdk</span>
-      </div>
-
-      {/* Content */}
-      <div className="absolute inset-0 z-10 flex flex-col p-4 pt-8">
-        <div className="mt-auto">
-          <div className="w-8 h-8 rounded-[3px] bg-white/80 backdrop-blur-sm flex items-center justify-center mb-3 group-hover:bg-blue/10 transition-colors">
+        {/* Content */}
+        <div className="p-4 flex flex-col justify-center md:w-[280px]">
+          <div className="w-8 h-8 rounded-[3px] bg-white border border-black/5 flex items-center justify-center mb-3 group-hover:bg-blue/10 group-hover:border-blue/20 transition-colors">
             <Terminal className="w-4 h-4 text-black group-hover:text-blue transition-colors" />
           </div>
 
@@ -211,14 +206,14 @@ function APICard() {
             Developer-first Infrastructure
           </h3>
           <p className="text-black/60 text-xs leading-relaxed mb-3">
-            Full API access, webhooks, and SDK for seamless integration.
+            Full API access, webhooks, and SDK for seamless integration. Ship incentive logic in minutes.
           </p>
 
           <div className="pt-3 border-t border-black/10 flex flex-wrap items-center gap-1.5">
-            {["REST API", "Webhooks", "SDK"].map((item) => (
+            {["REST API", "Webhooks", "TypeScript SDK"].map((item) => (
               <span
                 key={item}
-                className="px-2 py-1 bg-white/80 backdrop-blur-sm rounded-[2px] font-mono text-[10px] text-black/60"
+                className="px-2 py-1 bg-gray-50 rounded-[2px] font-mono text-[10px] text-black/60 border border-black/5"
               >
                 {item}
               </span>
