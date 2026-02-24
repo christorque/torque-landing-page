@@ -9,7 +9,6 @@ import {
   ArrowUpRight,
   CircleDot,
   TrendingUp,
-  Gem,
   Rocket,
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
@@ -120,32 +119,6 @@ const solutions: Solution[] = [
         "Post-Launch Retention: tiered loyalty mechanics that reward sustained engagement past day one, converting launch participants into long-term users.",
       mechanics: ["Hold-to-Earn Tiers (7d / 30d / 90d)", "Post-Launch Activity Multipliers"],
       result: "3.2x Day-30 Retention",
-    },
-  },
-  {
-    id: "memecoins",
-    sector: "Meme Coins",
-    icon: Gem,
-    filename: "memecoin.strategy",
-    image: "/generated/image/light-mono/blocks-chain-light.jpg",
-    insight: {
-      title: "Diamond Hand Rewards",
-      stat: "The PvP Rotator Trap (Buy-Pump-Dump in Hours).",
-    },
-    problem: {
-      title: "The PvP Rotator Trap",
-      points: [
-        "Users buy, pump, and dump within hours",
-        "Liquidity is mercenary and communities churn faster than they form",
-        "No incentive to hold or engage beyond short-term speculation",
-      ],
-    },
-    fix: {
-      title: "Time-weighted incentives that reward diamond hands.",
-      description:
-        "Diamond Hand Rewards: time-weighted incentives reward users who hold for 7+ days, turning rotators into community members.",
-      mechanics: ["Time-Weighted Hold Incentives (7d+)", "Raid-to-Earn Social Graph Payouts"],
-      result: "+85% Holder Retention",
     },
   },
 ];

@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { GlitchText } from "@/components/terminal";
 import { Button } from "@/components/ui/button";
-import { ArrowUpRight, Terminal, CircleDot, TrendingUp, ChevronDown, Rocket, Gem } from "lucide-react";
+import { ArrowUpRight, Terminal, CircleDot, TrendingUp, ChevronDown, Rocket } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import IntegrationRequestModal from "./IntegrationRequestModal";
 import TrustBar from "./TrustBar";
@@ -14,7 +14,6 @@ import { ImageGradient } from "@/components/ascii/ImageGradient";
 import { VelocityFlow } from "@/components/card-visuals/VelocityFlow";
 import { RetentionLoop } from "@/components/card-visuals/RetentionLoop";
 import { RisingBars } from "@/components/card-visuals/RisingBars";
-import { RafflePattern } from "@/components/card-visuals/RafflePattern";
 import { TorqueHelicoid } from "@/components/three/TorqueHelicoid";
 
 // =============================================================================
@@ -222,7 +221,7 @@ function SolutionSection() {
         </div>
 
         {/* Solution Cards Grid */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-3 gap-6">
           <SolutionCard
             icon={CircleDot}
             title="Stablecoins"
@@ -249,15 +248,6 @@ function SolutionSection() {
             visual={RisingBars}
             diagnosis="The Launch-and-Leave Problem (95% Day-7 Drop-off)"
             fix="Reward post-launch engagement with tiered loyalty mechanics that keep users past day one."
-          />
-          <SolutionCard
-            icon={Gem}
-            title="Meme Coins"
-            subtitle="Diamond Hand Rewards"
-            filename="memecoin.strategy"
-            visual={RafflePattern}
-            diagnosis="The PvP Rotator Trap (Buy-Pump-Dump in Hours)"
-            fix="Time-weighted incentives reward holders who stay 7+ days, turning rotators into community."
           />
         </div>
       </div>
