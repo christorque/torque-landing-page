@@ -66,7 +66,7 @@ function PlaybookCard({ playbook }: PlaybookCardProps) {
   return (
     <a
       href="/playbooks"
-      className="group relative rounded-[3px] overflow-hidden border border-black/10 hover:border-blue/30 transition-all min-h-[720px]"
+      className="group relative rounded-[3px] overflow-hidden border border-black/10 hover:border-blue/30 transition-all min-h-[720px] bg-gradient-to-br from-blue/[0.04] via-white to-blue/[0.02]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

@@ -167,7 +167,7 @@ function StrategyCardComponent({ strategy }: StrategyCardComponentProps) {
     <>
       <div
         onClick={handleCardClick}
-        className="group relative rounded-[3px] overflow-hidden border border-black/5 hover:border-black/15 transition-all duration-200 min-h-[420px] cursor-pointer"
+        className="group relative rounded-[3px] overflow-hidden border border-black/5 hover:border-black/15 transition-all duration-200 min-h-[420px] cursor-pointer bg-gradient-to-br from-blue/[0.03] via-white to-blue/[0.02]"
       >
 
         {/* Terminal Header */}

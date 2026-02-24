@@ -203,7 +203,7 @@ export default function PlatformPage() {
             ].map((item) => (
               <div
                 key={item.step}
-                className="relative rounded-[3px] overflow-hidden group border border-black/5 hover:border-black/15 transition-colors h-[48rem]"
+                className="relative rounded-[3px] overflow-hidden group border border-black/5 hover:border-black/15 transition-colors h-[48rem] bg-gradient-to-br from-blue/[0.03] via-white to-blue/[0.02]"
               >
                 <div className="absolute inset-0 z-10 flex flex-col justify-end p-4">
                   <div className="text-3xl font-display font-bold text-black/10 mb-2">

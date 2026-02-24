@@ -247,7 +247,7 @@ function SolutionCard({ solution }: SolutionCardProps) {
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="relative rounded-[3px] overflow-hidden border border-black/5 hover:border-black/15 transition-colors"
+      className="relative rounded-[3px] overflow-hidden border border-black/5 hover:border-black/15 transition-colors bg-gradient-to-br from-blue/[0.03] via-white to-blue/[0.02]"
     >
 
       {/* Terminal Header */}

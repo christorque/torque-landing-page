@@ -43,7 +43,7 @@ export default function GrowthStack() {
               icon={Code}
               title="Programmable Rewards"
               description='Set conditions like "only reward users who hold >$1K and traded 3+ times this week." No more paying for bots or one-time farmers.'
-              image="/generated/image/mono-3d/glass-cube-stack.jpg"
+              image="/generated/image/glass-chrome/B1-programmable-rewards.jpg"
               imageAlt="Code editor showing programmable reward logic"
               filename="rewards.config"
               href="/platform"
@@ -62,7 +62,7 @@ export default function GrowthStack() {
               icon={Trophy}
               title="Leaderboards"
               description="Real-time rankings turn passive holders into competing power users."
-              image="/generated/image/mono-3d/ascending-bars.jpg"
+              image="/generated/image/glass-chrome/B2-leaderboard-glass.jpg"
               imageAlt="Leaderboard interface"
               filename="leaderboard.tsx"
               href="/platform"
@@ -76,7 +76,7 @@ export default function GrowthStack() {
               icon={Brain}
               title="AI Insights"
               description='Ask "Which wallets are about to churn?" and get actionable recommendations.'
-              image="/generated/image/mono-3d/data-stream.jpg"
+              image="/generated/image/glass-chrome/B3-ai-neural.jpg"
               imageAlt="AI neural network visualization"
               filename="intelligence.ai"
               href="/platform"
@@ -191,7 +191,7 @@ function APICard() {
 
       {/* Background Image */}
       <div className="absolute inset-0">
-        <SmartImage src="/generated/image/mono-3d/network-grid.jpg" alt="Network grid" fill className="object-cover" />
+        <SmartImage src="/generated/image/glass-chrome/B4-api-infrastructure.jpg" alt="API infrastructure" fill className="object-cover" />
       </div>
 
       {/* White gradient overlay */}

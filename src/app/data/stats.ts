@@ -5,7 +5,6 @@ export interface Stat {
 
 export const heroStats: Stat[] = [
   { value: "$10M+", label: "Distributed" },
-  { value: "906K", label: "Wallets Analyzed" },
   { value: "4.2x", label: "Avg. ROI Increase" },
 ];
 

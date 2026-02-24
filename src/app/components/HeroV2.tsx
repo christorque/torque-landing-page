@@ -100,7 +100,7 @@ const HeroV2 = () => {
             {/* Terminal Tag */}
             <div className="inline-flex items-center gap-2 mb-6 font-mono text-xs uppercase tracking-wider text-black/60 border border-black/10 px-3 py-1.5 rounded-[3px]">
               <Terminal className="w-3 h-3" />
-              <span>Solana Growth Protocol</span>
+              <span>5x Avg. Retention Rates</span>
               <span className="w-1.5 h-1.5 bg-blue rounded-full animate-pulse" />
             </div>
 
@@ -272,7 +272,7 @@ function SolutionCard({ icon: Icon, title, subtitle, filename, visual: Visual, d
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="relative rounded-[3px] overflow-hidden group border border-black/10 hover:border-blue/30 transition-all min-h-[780px]" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+    <div className="relative rounded-[3px] overflow-hidden group border border-black/10 hover:border-blue/30 transition-all min-h-[780px] bg-gradient-to-br from-blue/[0.04] via-white to-blue/[0.02]" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       {/* Procedural visual background - visible on hover */}
       <div className="absolute inset-0 opacity-15 group-hover:opacity-100 transition-opacity duration-500">
         <Visual color="#0000FF" paused={!isHovered} />
