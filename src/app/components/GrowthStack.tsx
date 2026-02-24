@@ -46,6 +46,7 @@ export default function GrowthStack() {
               image="/generated/image/mono-3d/glass-cube-stack.jpg"
               imageAlt="Code editor showing programmable reward logic"
               filename="rewards.config"
+              href="/platform"
               features={[
                 { icon: Zap, label: "Conditional Logic" },
                 { dot: true, label: "Real-time" },
@@ -64,6 +65,7 @@ export default function GrowthStack() {
               image="/generated/image/mono-3d/ascending-bars.jpg"
               imageAlt="Leaderboard interface"
               filename="leaderboard.tsx"
+              href="/platform"
               metric="2.1x volume increase"
             />
           </div>
@@ -77,6 +79,7 @@ export default function GrowthStack() {
               image="/generated/image/mono-3d/data-stream.jpg"
               imageAlt="AI neural network visualization"
               filename="intelligence.ai"
+              href="/platform"
               metric="Predictive analytics"
             />
           </div>
@@ -101,6 +104,7 @@ interface FeatureCardProps {
   image: string;
   imageAlt: string;
   filename: string;
+  href: string;
   features?: Array<{ icon?: React.ComponentType<{ className?: string }>; dot?: boolean; label: string }>;
   metric?: string;
   large?: boolean;
@@ -113,13 +117,14 @@ function FeatureCard({
   description,
   image,
   filename,
+  href,
   features,
   metric,
   large,
   featured,
 }: FeatureCardProps) {
   return (
-    <div className={`relative rounded-[3px] group h-full border transition-all overflow-hidden ${large ? "min-h-[392px]" : "min-h-[336px]"} ${featured ? "border-blue/20 hover:border-blue/40 shadow-[0_0_40px_-10px_rgba(0,122,255,0.15)]" : "border-black/5 hover:border-black/15"}`}>
+    <a href={href} className={`relative rounded-[3px] group h-full border transition-all overflow-hidden block ${large ? "min-h-[392px]" : "min-h-[336px]"} ${featured ? "border-blue/20 hover:border-blue/40 shadow-[0_0_40px_-10px_rgba(0,122,255,0.15)]" : "border-black/5 hover:border-black/15"}`}>
 
       {/* Background Image */}
       <div className="absolute inset-0">
@@ -173,7 +178,7 @@ function FeatureCard({
           )}
         </div>
       </div>
-    </div>
+    </a>
   );
 }
 
@@ -182,7 +187,7 @@ function FeatureCard({
 // =============================================================================
 function APICard() {
   return (
-    <div className="relative rounded-[3px] group h-full border border-black/5 hover:border-black/15 transition-colors overflow-hidden min-h-[280px]">
+    <a href="/platform" className="relative rounded-[3px] group h-full border border-black/5 hover:border-black/15 transition-colors overflow-hidden min-h-[280px] block">
 
       {/* Background Image */}
       <div className="absolute inset-0">
@@ -225,6 +230,6 @@ function APICard() {
           </div>
         </div>
       </div>
-    </div>
+    </a>
   );
 }

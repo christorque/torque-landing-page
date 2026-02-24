@@ -6,9 +6,11 @@ import { motion, useInView } from "framer-motion";
 
 const logos = [
   { name: "Solana", src: "/logos/solana.svg" },
+  { name: "WLFI", src: "/logos/usd1.svg" },
   { name: "Raydium", src: "/logos/raydium.svg" },
-  { name: "Metaplex", src: "/logos/metaplex.svg" },
-  { name: "Darklake", src: "/logos/darklake.svg" },
+  { name: "Axiom", src: "/logos/axiom.svg" },
+  { name: "MPLX", src: "/logos/metaplex.svg" },
+  { name: "Tensor", src: "/logos/tensor.svg" },
 ];
 
 const containerVariants = {

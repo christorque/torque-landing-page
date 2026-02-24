@@ -13,7 +13,6 @@ const buttonVariants = cva(
     "transition-all duration-200 ease-out",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2",
     "disabled:pointer-events-none disabled:opacity-50",
-    "strobe-glitch",
   ],
   {
     variants: {

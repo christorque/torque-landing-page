@@ -8,11 +8,8 @@ import { Button } from "@/components/ui/button";
 import {
   ArrowUpRight,
   CircleDot,
-  CreditCard,
   TrendingUp,
   Gem,
-  Sparkles,
-  Terminal,
   Rocket,
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
@@ -42,77 +39,11 @@ interface Solution {
   };
 }
 
-interface AdditionalMarket {
-  icon: React.ComponentType<{ className?: string }>;
-  headline: string;
-  filename: string;
-  image: string;
-  problem: {
-    title: string;
-    description: string;
-  };
-  fix: {
-    title: string;
-    mechanics: string[];
-  };
-}
 
 // =============================================================================
 // Data
 // =============================================================================
 const solutions: Solution[] = [
-  {
-    id: "lending",
-    sector: "Lending",
-    icon: CreditCard,
-    filename: "lending.strategy",
-    image: "/generated/image/light-mono/value-stack-light.jpg",
-    insight: {
-      title: "Targeted Liquidity Injection",
-      stat: "The Utilization Paradox (High TVL / Low Borrowing).",
-    },
-    problem: {
-      title: "The Utilization Paradox",
-      points: [
-        "Massive deposits sitting idle earning minimal yield",
-        "Borrowing is under-incentivized compared to lending",
-        "Capital efficiency is broken—TVL doesn't equal usage",
-      ],
-    },
-    fix: {
-      title: "Reward 'First-Time' LPs with duration-weighted bonuses.",
-      description:
-        "Targeted Liquidity Injection: instead of universal APY, we targeted new LPs with duration-weighted bonuses to prime the pump.",
-      mechanics: ["First-Time Deposit Bonus (5-10%)", "Duration-Weighted Rewards"],
-      result: "Highest Utilization Rate (53%)",
-    },
-  },
-  {
-    id: "perps",
-    sector: "Perps",
-    icon: TrendingUp,
-    filename: "perps.strategy",
-    image: "/generated/image/light-mono/network-nodes-light.jpg",
-    insight: {
-      title: "Habit Formation Architecture",
-      stat: "The 'One-and-Done' Trader (High Churn).",
-    },
-    problem: {
-      title: "The One-and-Done Trader",
-      points: [
-        "High volume metrics hide mercenary trading behavior",
-        "Users trade once for rewards, then disappear",
-        "Volume quality is ignored in favor of raw numbers",
-      ],
-    },
-    fix: {
-      title: "Incentivize 'Streaks' over raw volume.",
-      description:
-        "Habit Formation Architecture: we shifted incentives from raw volume to 'Streaks' to build habitual protocol usage.",
-      mechanics: ["Volume-Based Raffles", "Streak Bonuses"],
-      result: "+146% Net Retention",
-    },
-  },
   {
     id: "stablecoins",
     sector: "Stablecoins",
@@ -139,64 +70,86 @@ const solutions: Solution[] = [
       result: "+40% Velocity Increase",
     },
   },
-];
-
-const additionalMarkets: AdditionalMarket[] = [
   {
-    icon: Gem,
-    headline: "Memecoins & Communities",
-    filename: "memecoin.strategy",
+    id: "trading",
+    sector: "Trading Platforms",
+    icon: TrendingUp,
+    filename: "trading.strategy",
+    image: "/generated/image/light-mono/network-nodes-light.jpg",
+    insight: {
+      title: "Habit Formation Architecture",
+      stat: "The 'One-and-Done' Trader (High Churn).",
+    },
+    problem: {
+      title: "The One-and-Done Trader",
+      points: [
+        "High volume metrics hide mercenary trading behavior",
+        "Users trade once for rewards, then disappear",
+        "Volume quality is ignored in favor of raw numbers",
+      ],
+    },
+    fix: {
+      title: "Incentivize 'Streaks' over raw volume.",
+      description:
+        "Habit Formation Architecture: we shifted incentives from raw volume to 'Streaks' to build habitual protocol usage.",
+      mechanics: ["Volume-Based Raffles", "Streak Bonuses"],
+      result: "+146% Net Retention",
+    },
+  },
+  {
+    id: "launchpads",
+    sector: "Launchpads",
+    icon: Rocket,
+    filename: "launchpad.strategy",
     image: "/generated/image/light-mono/data-particles.jpg",
+    insight: {
+      title: "Post-Launch Retention",
+      stat: "The Launch-and-Leave Problem (95% Day-7 Drop-off).",
+    },
+    problem: {
+      title: "The Launch-and-Leave Problem",
+      points: [
+        "Token launches drive massive day-1 activity that evaporates by day 7",
+        "Early participants flip tokens immediately after launch",
+        "No mechanism to convert launch hype into sustained protocol usage",
+      ],
+    },
+    fix: {
+      title: "Reward post-launch engagement with tiered loyalty mechanics.",
+      description:
+        "Post-Launch Retention: tiered loyalty mechanics that reward sustained engagement past day one, converting launch participants into long-term users.",
+      mechanics: ["Hold-to-Earn Tiers (7d / 30d / 90d)", "Post-Launch Activity Multipliers"],
+      result: "3.2x Day-30 Retention",
+    },
+  },
+  {
+    id: "memecoins",
+    sector: "Meme Coins",
+    icon: Gem,
+    filename: "memecoin.strategy",
+    image: "/generated/image/light-mono/blocks-chain-light.jpg",
+    insight: {
+      title: "Diamond Hand Rewards",
+      stat: "The PvP Rotator Trap (Buy-Pump-Dump in Hours).",
+    },
     problem: {
       title: "The PvP Rotator Trap",
-      description:
-        "Users buy, pump, and dump within hours. Liquidity is mercenary, and communities churn faster than they form.",
-    },
-    fix: {
-      title: '"Diamond Hand" Rewards',
-      mechanics: [
-        "Time-Weighted Incentives: Reward users who hold for 7+ days",
-        "Raid-to-Earn: Link on-chain payouts to Social Graph engagement",
+      points: [
+        "Users buy, pump, and dump within hours",
+        "Liquidity is mercenary and communities churn faster than they form",
+        "No incentive to hold or engage beyond short-term speculation",
       ],
     },
-  },
-  {
-    icon: Sparkles,
-    headline: "Prediction Markets",
-    filename: "prediction.strategy",
-    image: "/generated/image/light-mono/network-pulse-light.jpg",
-    problem: {
-      title: "Event-Driven Churn",
-      description:
-        "Users bet on a single major event and then leave the protocol entirely once it settles.",
-    },
     fix: {
-      title: "Cross-Category Streaks",
-      mechanics: [
-        "Streak Leaderboards: Require betting on 3 different categories to unlock multipliers",
-        "Consolation Rebates: Auto-refund a % of fees to high-volume users who lose",
-      ],
-    },
-  },
-  {
-    icon: Terminal,
-    headline: "Terminals & Aggregators",
-    filename: "terminal.strategy",
-    image: "/generated/image/light-mono/blocks-chain-light.jpg",
-    problem: {
-      title: "Interface Commoditization",
+      title: "Time-weighted incentives that reward diamond hands.",
       description:
-        "Users switch terminals based on whichever has the lowest fees or fastest execution. Zero loyalty.",
-    },
-    fix: {
-      title: "Embedded Loyalty Layer",
-      mechanics: [
-        "Native XP System: Rewards cumulative volume routed through your terminal",
-        "Fee Rebates: Refund gas costs in your native token",
-      ],
+        "Diamond Hand Rewards: time-weighted incentives reward users who hold for 7+ days, turning rotators into community members.",
+      mechanics: ["Time-Weighted Hold Incentives (7d+)", "Raid-to-Earn Social Graph Payouts"],
+      result: "+85% Holder Retention",
     },
   },
 ];
+
 
 // =============================================================================
 // Solutions Page
@@ -244,9 +197,6 @@ export default function SolutionsPage() {
 
         {/* Solutions Section */}
         <SolutionsGrid />
-
-        {/* Additional Markets */}
-        <AdditionalMarketsSection />
 
         {/* CTA Section */}
         <SolutionsCTA onOpenModal={() => setIsModalOpen(true)} />
@@ -429,114 +379,6 @@ function SolutionCard({ solution }: SolutionCardProps) {
 }
 
 // =============================================================================
-// Additional Markets Section
-// =============================================================================
-function AdditionalMarketsSection() {
-  return (
-    <section className="w-full bg-white border-t border-black/10">
-      <div className="w-full px-6 md:px-12 lg:px-20 py-20 md:py-32">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-16">
-          <div>
-            <div className="inline-flex items-center gap-2 mb-6 font-mono text-xs uppercase tracking-wider text-black/60 border border-black/10 px-3 py-1.5 rounded-[3px]">
-              <span className="w-1.5 h-1.5 bg-blue rounded-full animate-pulse" />
-              <span>More Sectors</span>
-            </div>
-
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-medium text-black mb-6 max-w-4xl leading-[1.1] tracking-tight">
-              Also optimized
-              <br />
-              <span className="text-black/40">for high-velocity markets</span>
-            </h2>
-
-            <p className="text-lg md:text-xl text-black/60 max-w-2xl">
-              Torque primitives are sector-agnostic. We support the highest-velocity economies on
-              Solana.
-            </p>
-          </div>
-        </div>
-
-        {/* Markets Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-          {additionalMarkets.map((market, index) => (
-            <MarketCard key={index} market={market} index={index} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// =============================================================================
-// Market Card
-// =============================================================================
-interface MarketCardProps {
-  market: AdditionalMarket;
-  index: number;
-}
-
-function MarketCard({ market, index }: MarketCardProps) {
-  const Icon = market.icon;
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="group relative rounded-[3px] overflow-hidden border border-black/5 hover:border-black/15 transition-colors min-h-[720px]"
-    >
-
-      {/* Terminal Header */}
-      <div className="absolute top-0 left-0 right-0 flex items-center gap-1.5 px-3 py-1.5 z-10">
-        <span className="w-1.5 h-1.5 rounded-full bg-black/20" />
-        <span className="font-mono text-[9px] text-black/30">{market.filename}</span>
-      </div>
-
-      {/* Content */}
-      <div className="absolute inset-0 z-10 flex flex-col p-4 pt-8">
-        <div className="mt-auto">
-          {/* Icon */}
-          <div className="w-10 h-10 rounded-[3px] bg-white/80 backdrop-blur-sm flex items-center justify-center mb-3 group-hover:bg-blue/10 transition-colors">
-            <Icon className="w-5 h-5 text-black group-hover:text-blue transition-colors" />
-          </div>
-
-          {/* Title */}
-          <h3 className="font-display text-lg font-medium text-black mb-4 group-hover:text-blue transition-colors">
-            {market.headline}
-          </h3>
-
-          {/* Problem */}
-          <div className="mb-4 p-3 bg-white/60 backdrop-blur-sm rounded-[3px] border-l-2 border-black/20">
-            <span className="text-[9px] font-mono uppercase tracking-wider text-black/40 block mb-1">
-              The Problem: {market.problem.title}
-            </span>
-            <p className="text-xs text-black/70 leading-relaxed">{market.problem.description}</p>
-          </div>
-
-          {/* Fix */}
-          <div className="p-3 bg-white/60 backdrop-blur-sm rounded-[3px] border-l-2 border-blue">
-            <span className="text-[9px] font-mono uppercase tracking-wider text-blue block mb-1">
-              The Fix: {market.fix.title}
-            </span>
-            <ul className="space-y-1">
-              {market.fix.mechanics.map((mechanic, i) => (
-                <li key={i} className="flex items-start gap-1.5 text-xs text-black/80">
-                  <span className="text-blue mt-0.5">+</span>
-                  {mechanic}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-// =============================================================================
 // Solutions CTA Section
 // =============================================================================
 interface SolutionsCTAProps {
@@ -570,11 +412,11 @@ function SolutionsCTA({ onOpenModal }: SolutionsCTAProps) {
         </p>
         <div className="flex flex-wrap items-center gap-4">
           <Button variant="accent" onClick={onOpenModal}>
-            Deploy Logic
+            Get Started
             <ArrowUpRight className="w-4 h-4 ml-2" />
           </Button>
-          <Button variant="outline" href="/primitives">
-            Explore Primitives
+          <Button variant="outline" href="/solutions">
+            View Solutions
             <ArrowUpRight className="w-4 h-4 ml-2" />
           </Button>
         </div>

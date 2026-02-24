@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { GlitchText } from "@/components/terminal";
 import { Button } from "@/components/ui/button";
-import { ArrowUpRight, Terminal, CircleDot, CreditCard, TrendingUp, ChevronDown, Rocket } from "lucide-react";
+import { ArrowUpRight, Terminal, CircleDot, TrendingUp, ChevronDown, Rocket, Gem } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import IntegrationRequestModal from "./IntegrationRequestModal";
 import TrustBar from "./TrustBar";
@@ -12,8 +12,9 @@ import PlaybooksSection from "./PlaybooksSection";
 import { heroStats, heroRotatingPhrases } from "@/app/data/stats";
 import { ImageGradient } from "@/components/ascii/ImageGradient";
 import { VelocityFlow } from "@/components/card-visuals/VelocityFlow";
-import { LiquidityPool } from "@/components/card-visuals/LiquidityPool";
 import { RetentionLoop } from "@/components/card-visuals/RetentionLoop";
+import { RisingBars } from "@/components/card-visuals/RisingBars";
+import { RafflePattern } from "@/components/card-visuals/RafflePattern";
 import { TorqueHelicoid } from "@/components/three/TorqueHelicoid";
 
 // =============================================================================
@@ -100,7 +101,7 @@ const HeroV2 = () => {
             {/* Terminal Tag */}
             <div className="inline-flex items-center gap-2 mb-6 font-mono text-xs uppercase tracking-wider text-black/60 border border-black/10 px-3 py-1.5 rounded-[3px]">
               <Terminal className="w-3 h-3" />
-              <span>89M+ transactions indexed</span>
+              <span>Solana Growth Protocol</span>
               <span className="w-1.5 h-1.5 bg-blue rounded-full animate-pulse" />
             </div>
 
@@ -127,14 +128,14 @@ const HeroV2 = () => {
                 variant="accent"
                 className="group"
               >
-                Deploy Logic
+                Get Started
                 <ArrowUpRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Button>
               <Button
                 variant="outline"
-                href="/primitives"
+                href="/solutions"
               >
-                Explore Primitives
+                View Solutions
                 <ArrowUpRight className="w-4 h-4 ml-2" />
               </Button>
             </div>
@@ -221,25 +222,7 @@ function SolutionSection() {
         </div>
 
         {/* Solution Cards Grid */}
-        <div className="grid md:grid-cols-3 gap-6">
-          <SolutionCard
-            icon={CreditCard}
-            title="Lending"
-            subtitle="Targeted Liquidity Injection"
-            filename="lending.strategy"
-            visual={LiquidityPool}
-            diagnosis="The Utilization Paradox (High TVL / Low Borrowing)"
-            fix="Reward 'First-Time' LPs with duration-weighted bonuses to prime the pump."
-          />
-          <SolutionCard
-            icon={TrendingUp}
-            title="Perps"
-            subtitle="Habit Formation Architecture"
-            filename="perps.strategy"
-            visual={RetentionLoop}
-            diagnosis="The 'One-and-Done' Trader (High Churn)"
-            fix="Incentivize 'Streaks' over raw volume to build habitual protocol usage."
-          />
+        <div className="grid md:grid-cols-2 gap-6">
           <SolutionCard
             icon={CircleDot}
             title="Stablecoins"
@@ -248,6 +231,33 @@ function SolutionSection() {
             visual={VelocityFlow}
             diagnosis="The Velocity Gap ($175M+ Cap / 0 Velocity)"
             fix="Use referral rebates to turn passive holders into active transaction agents."
+          />
+          <SolutionCard
+            icon={TrendingUp}
+            title="Trading Platforms"
+            subtitle="Habit Formation Architecture"
+            filename="trading.strategy"
+            visual={RetentionLoop}
+            diagnosis="The 'One-and-Done' Trader (High Churn)"
+            fix="Incentivize 'Streaks' over raw volume to build habitual protocol usage."
+          />
+          <SolutionCard
+            icon={Rocket}
+            title="Launchpads"
+            subtitle="Post-Launch Retention"
+            filename="launchpad.strategy"
+            visual={RisingBars}
+            diagnosis="The Launch-and-Leave Problem (95% Day-7 Drop-off)"
+            fix="Reward post-launch engagement with tiered loyalty mechanics that keep users past day one."
+          />
+          <SolutionCard
+            icon={Gem}
+            title="Meme Coins"
+            subtitle="Diamond Hand Rewards"
+            filename="memecoin.strategy"
+            visual={RafflePattern}
+            diagnosis="The PvP Rotator Trap (Buy-Pump-Dump in Hours)"
+            fix="Time-weighted incentives reward holders who stay 7+ days, turning rotators into community."
           />
         </div>
       </div>
@@ -356,11 +366,11 @@ function HomepageCTA({ onOpenModal }: HomepageCTAProps) {
         </p>
         <div className="flex flex-wrap items-center gap-4">
           <Button variant="accent" onClick={onOpenModal}>
-            Deploy Logic
+            Get Started
             <ArrowUpRight className="w-4 h-4 ml-2" />
           </Button>
-          <Button variant="outline" href="/primitives">
-            Explore Primitives
+          <Button variant="outline" href="/solutions">
+            View Solutions
             <ArrowUpRight className="w-4 h-4 ml-2" />
           </Button>
         </div>
