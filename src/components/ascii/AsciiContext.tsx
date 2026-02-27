@@ -47,11 +47,11 @@ const defaultDitherOptions: DitherOptions = {
 const AsciiContext = createContext<AsciiContextType | null>(null);
 
 export function AsciiProvider({ children }: { children: React.ReactNode }) {
-  const [enabled, setEnabled] = useState(true);
-  const [effectMode, setEffectMode] = useState<EffectMode>("dither");
+  const [enabled, setEnabled] = useState(false);
+  const [effectMode, setEffectMode] = useState<EffectMode>("none");
   const [options, setOptions] = useState<AsciiOptions>(defaultOptions);
   const [ditherOptions, setDitherOptions] = useState<DitherOptions>(defaultDitherOptions);
-  const [hideGradients, setHideGradients] = useState(true);
+  const [hideGradients, setHideGradients] = useState(false);
 
   const updateOption = useCallback(<K extends keyof AsciiOptions>(key: K, value: AsciiOptions[K]) => {
     setOptions((prev) => ({ ...prev, [key]: value }));
