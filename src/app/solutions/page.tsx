@@ -10,6 +10,7 @@ import {
   CircleDot,
   TrendingUp,
   Rocket,
+  Landmark,
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 
@@ -44,36 +45,36 @@ interface Solution {
 // =============================================================================
 const solutions: Solution[] = [
   {
-    id: "stablecoins",
-    sector: "Stablecoins",
-    icon: CircleDot,
-    filename: "stablecoin.strategy",
+    id: "lending",
+    sector: "Lending",
+    icon: Landmark,
+    filename: "lending.strategy",
     image: "/generated/image/light-mono/floating-mass-01.jpg",
     insight: {
-      title: "Distribution Nodes",
-      stat: "The Velocity Gap ($175M+ Cap / 0 Velocity).",
+      title: "Targeted Liquidity Injection",
+      stat: "The Utilization Cliff (Idle Capital / Low Yield).",
     },
     problem: {
-      title: "The Velocity Gap",
+      title: "The Utilization Cliff",
       points: [
-        "Stablecoins sit idle in wallets instead of circulating",
-        "High market cap creates false sense of adoption",
-        "No incentive for holders to actually use the asset",
+        "Lending pools sit underutilized with idle capital earning minimal yield",
+        "Borrowers have no incentive to choose your protocol over competitors",
+        "Depositors leave when yields compress below market rate",
       ],
     },
     fix: {
-      title: "Turn passive holders into active transaction agents.",
+      title: "Inject targeted incentives to attract borrowers and stabilize utilization.",
       description:
-        "Distribution Nodes: use referral rebates to turn passive holders into active transaction agents.",
-      mechanics: ["Referral Rebate (0.1% of volume)", "Looping Bonus (Leverage > 3x)"],
-      result: "+40% Velocity Increase",
+        "Targeted Liquidity Injection: deploy conditional rewards that attract quality borrowers and maintain optimal utilization rates.",
+      mechanics: ["Borrow-to-Earn Rebates", "Utilization-Based Bonus Tiers"],
+      result: "+65% Utilization Rate",
     },
   },
   {
-    id: "trading",
-    sector: "Trading Platforms",
+    id: "perps",
+    sector: "Perps",
     icon: TrendingUp,
-    filename: "trading.strategy",
+    filename: "perps.strategy",
     image: "/generated/image/light-mono/network-nodes-light.jpg",
     insight: {
       title: "Habit Formation Architecture",
@@ -96,29 +97,29 @@ const solutions: Solution[] = [
     },
   },
   {
-    id: "launchpads",
-    sector: "Launchpads",
-    icon: Rocket,
-    filename: "launchpad.strategy",
+    id: "stablecoins",
+    sector: "Stablecoins",
+    icon: CircleDot,
+    filename: "stablecoin.strategy",
     image: "/generated/image/light-mono/data-particles.jpg",
     insight: {
-      title: "Post-Launch Retention",
-      stat: "The Launch-and-Leave Problem (95% Day-7 Drop-off).",
+      title: "Distribution Nodes",
+      stat: "The Velocity Gap ($175M+ Cap / 0 Velocity).",
     },
     problem: {
-      title: "The Launch-and-Leave Problem",
+      title: "The Velocity Gap",
       points: [
-        "Token launches drive massive day-1 activity that evaporates by day 7",
-        "Early participants flip tokens immediately after launch",
-        "No mechanism to convert launch hype into sustained protocol usage",
+        "Stablecoins sit idle in wallets instead of circulating",
+        "High market cap creates false sense of adoption",
+        "No incentive for holders to actually use the asset",
       ],
     },
     fix: {
-      title: "Reward post-launch engagement with tiered loyalty mechanics.",
+      title: "Turn passive holders into active transaction agents.",
       description:
-        "Post-Launch Retention: tiered loyalty mechanics that reward sustained engagement past day one, converting launch participants into long-term users.",
-      mechanics: ["Hold-to-Earn Tiers (7d / 30d / 90d)", "Post-Launch Activity Multipliers"],
-      result: "3.2x Day-30 Retention",
+        "Distribution Nodes: use referral rebates to turn passive holders into active transaction agents.",
+      mechanics: ["Referral Rebate (0.1% of volume)", "Looping Bonus (Leverage > 3x)"],
+      result: "+40% Velocity Increase",
     },
   },
 ];

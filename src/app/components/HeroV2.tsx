@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { GlitchText } from "@/components/terminal";
 import { Button } from "@/components/ui/button";
-import { ArrowUpRight, Terminal, CircleDot, TrendingUp, ChevronDown, Rocket } from "lucide-react";
+import { ArrowUpRight, Terminal, CircleDot, TrendingUp, ChevronDown, Rocket, Landmark } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import IntegrationRequestModal from "./IntegrationRequestModal";
 import TrustBar from "./TrustBar";
@@ -100,7 +100,7 @@ const HeroV2 = () => {
             {/* Terminal Tag */}
             <div className="inline-flex items-center gap-2 mb-6 font-mono text-xs uppercase tracking-wider text-black/60 border border-black/10 px-3 py-1.5 rounded-[3px]">
               <Terminal className="w-3 h-3" />
-              <span>5x Avg. Retention Rates</span>
+              <span>1.89M+ Transactions Indexed</span>
               <span className="w-1.5 h-1.5 bg-blue rounded-full animate-pulse" />
             </div>
 
@@ -127,14 +127,14 @@ const HeroV2 = () => {
                 variant="accent"
                 className="group"
               >
-                Get Started
+                Deploy Logic
                 <ArrowUpRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Button>
               <Button
                 variant="outline"
                 href="/solutions"
               >
-                View Solutions
+                Explore Primitives
                 <ArrowUpRight className="w-4 h-4 ml-2" />
               </Button>
             </div>
@@ -223,31 +223,31 @@ function SolutionSection() {
         {/* Solution Cards Grid */}
         <div className="grid md:grid-cols-3 gap-6">
           <SolutionCard
-            icon={CircleDot}
-            title="Stablecoins"
-            subtitle="Distribution Nodes"
-            filename="stablecoin.strategy"
+            icon={Landmark}
+            title="Lending"
+            subtitle="Targeted Liquidity Injection"
+            filename="lending.strategy"
             visual={VelocityFlow}
-            diagnosis="The Velocity Gap ($175M+ Cap / 0 Velocity)"
-            fix="Use referral rebates to turn passive holders into active transaction agents."
+            diagnosis="The Utilization Cliff (Idle Capital / Low Yield)"
+            fix="Inject targeted incentives to attract borrowers and stabilize utilization rates."
           />
           <SolutionCard
             icon={TrendingUp}
-            title="Trading Platforms"
+            title="Perps"
             subtitle="Habit Formation Architecture"
-            filename="trading.strategy"
+            filename="perps.strategy"
             visual={RetentionLoop}
             diagnosis="The 'One-and-Done' Trader (High Churn)"
             fix="Incentivize 'Streaks' over raw volume to build habitual protocol usage."
           />
           <SolutionCard
-            icon={Rocket}
-            title="Launchpads"
-            subtitle="Post-Launch Retention"
-            filename="launchpad.strategy"
+            icon={CircleDot}
+            title="Stablecoins"
+            subtitle="Distribution Nodes"
+            filename="stablecoin.strategy"
             visual={RisingBars}
-            diagnosis="The Launch-and-Leave Problem (95% Day-7 Drop-off)"
-            fix="Reward post-launch engagement with tiered loyalty mechanics that keep users past day one."
+            diagnosis="The Velocity Gap ($175M+ Cap / 0 Velocity)"
+            fix="Use referral rebates to turn passive holders into active transaction agents."
           />
         </div>
       </div>
